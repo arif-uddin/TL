@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "819667125372",
+    "firebase_url": "https://tinylens-737dc.firebaseio.com",
+    "project_id": "tinylens-737dc",
+    "storage_bucket": "tinylens-737dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819667125372:android:94afd65f3efdf506",
+        "android_client_info": {
+          "package_name": "com.lazydevs.tinylens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819667125372-pbqqnvpbq4itv7spig8vve3k9kme16mi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lazydevs.tinylens",
+            "certificate_hash": "34a62aef82518173a0a7de6515ba7f9928e42a39"
+          }
+        },
+        {
+          "client_id": "819667125372-iade9u0fh517dbmb2ns4mpnab72bq937.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDrnE46Z6JTICX12vKbf00L747LnlyLpg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819667125372-iade9u0fh517dbmb2ns4mpnab72bq937.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
