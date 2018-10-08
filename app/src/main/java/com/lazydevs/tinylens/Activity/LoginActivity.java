@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lazydevs.tinylens.Helper;
 import com.lazydevs.tinylens.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView Register;
     Button login;
     FirebaseAuth firebaseAuth;
+    Helper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +52,50 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                helper=new Helper();
                 String Email = email.getText().toString();
                 String Pass = pass.getText().toString();
-                loginUser(Email,Pass);
+                if (Email.isEmpty())
+                {
+                    Toast.makeText(LoginActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    
+                    boolean isEmailValid=helper.isEmailValid(Email);
+                    
+                    if (isEmailValid)
+                    {
+                      if (Pass.isEmpty())
+                      {
+                          Toast.makeText(LoginActivity.this, "Please enter password!", Toast.LENGTH_SHORT).show();
+                          return; 
+                      } 
+                      
+                      else {
+                          
+                          boolean isPasswordValid= helper.isPasswordValid(Pass);
+                          
+                          if(isPasswordValid)
+                          {
+                              loginUser(Email,Pass);
+                          }
+                          
+                          else 
+                          {
+                              Toast.makeText(LoginActivity.this, "Password must be at least 6 character", Toast.LENGTH_SHORT).show();
+                              return;
+                          }
+                          
+                      }
+                        
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this, "Email is invalid!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
             }
         });
 

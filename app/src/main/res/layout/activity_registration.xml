@@ -7,42 +7,78 @@
     tools:context=".Activity.RegistrationActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="20dp"
+    android:padding="10dp"
+    android:background="@drawable/background_gradient"
     >
 
-    <EditText
+    <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="First Name"
-        android:id="@+id/et_first_name"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_last_name"
-        android:hint="Last Name"
-        />
+        android:layout_height="match_parent"
+        android:layout_weight="3">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_registration_email"
-        android:hint="Email"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:id="@+id/et_registration_pass"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiny Lens"
+            android:textSize="30dp"
+            />
+
+    </LinearLayout>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bt_registration_register"
-        android:text="Register"
-        android:onClick="register"
-        />
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:id="@+id/et_first_name"
+            />
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_last_name"
+            android:hint="Last Name"
+            />
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_registration_email"
+            android:hint="Email"
+            />
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:id="@+id/et_registration_pass"
+            />
+
+
+        <Button
+            android:id="@+id/bt_registration_register"
+            android:background="@drawable/rounded_button"
+            android:textColor="#fff"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textSize="15dp"
+            android:onClick="register"
+            />
+
+
+    </LinearLayout>
 
 </LinearLayout>
