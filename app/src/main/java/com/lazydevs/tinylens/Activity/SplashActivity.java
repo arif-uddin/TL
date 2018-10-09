@@ -1,22 +1,26 @@
 package com.lazydevs.tinylens.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lazydevs.tinylens.R;
 
 
 public class SplashActivity extends Activity {
     private Handler mWaitHandler = new Handler();
     TextView slogan, company;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
         slogan = (TextView) findViewById(R.id.slogan);
         company = (TextView) findViewById(R.id.company);
 
@@ -33,13 +37,25 @@ public class SplashActivity extends Activity {
 
                 try {
 
+                    Intent intent;
+                    //Let's Finish Splash Activity since we don't want to show this when user press back showOnMap.
+                    if (user!=null){
+                         intent = new Intent(SplashActivity.this,MainActivity.class);
+                       // startActivity(intent);
+                    } else
+                    {
+                        intent = new Intent(SplashActivity.this,LoginActivity.class);
+                       // startActivity(intent);
+                    }
                     //Let's Finish Splash Activity since we don't want to show this when user press back showOnMap.
                     finish();
+                    //startActivity(intent);
+
                 } catch (Exception ignored) {
                     ignored.printStackTrace();
                 }
             }
-        }, 2000);  // Give a 5 seconds delay.
+        }, 2000);  // Give a 2 seconds delay.
     }
 
     @Override
