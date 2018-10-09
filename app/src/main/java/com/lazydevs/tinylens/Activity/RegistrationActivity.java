@@ -120,6 +120,8 @@ public class RegistrationActivity extends AppCompatActivity {
                             Toast.makeText(RegistrationActivity.this,
                                     "Verification email sent to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
+
+
                         } else {
                             //Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(RegistrationActivity.this,

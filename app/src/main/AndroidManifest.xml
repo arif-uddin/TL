@@ -24,6 +24,9 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".Activity.RegistrationActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".Activity.UploadImageActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>
