@@ -14,13 +14,12 @@ import com.lazydevs.tinylens.R;
 public class SplashActivity extends Activity {
     private Handler mWaitHandler = new Handler();
     TextView slogan, company;
-    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        final FirebaseUser user = firebaseAuth.getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         slogan = (TextView) findViewById(R.id.slogan);
         company = (TextView) findViewById(R.id.company);
 
@@ -41,11 +40,11 @@ public class SplashActivity extends Activity {
                     //Let's Finish Splash Activity since we don't want to show this when user press back showOnMap.
                     if (user!=null){
                          intent = new Intent(SplashActivity.this,MainActivity.class);
-                       // startActivity(intent);
+                         startActivity(intent);
                     } else
                     {
                         intent = new Intent(SplashActivity.this,LoginActivity.class);
-                       // startActivity(intent);
+                         startActivity(intent);
                     }
                     //Let's Finish Splash Activity since we don't want to show this when user press back showOnMap.
                     finish();
