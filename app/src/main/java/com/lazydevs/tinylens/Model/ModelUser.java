@@ -4,6 +4,11 @@ public class ModelUser {
 
     String FirstName,LastName,Email;
 
+    ModelUser()
+    {
+
+    }
+
     public ModelUser(String firstName, String lastName, String email) {
         FirstName = firstName;
         LastName = lastName;

@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (Email.isEmpty())
                 {
                     Toast.makeText(LoginActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();
-                    return;
+
                 }
                 else {
                     
@@ -68,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                       if (Pass.isEmpty())
                       {
                           Toast.makeText(LoginActivity.this, "Please enter password!", Toast.LENGTH_SHORT).show();
-                          return; 
+
                       } 
                       
                       else {
@@ -83,15 +82,14 @@ public class LoginActivity extends AppCompatActivity {
                           else 
                           {
                               Toast.makeText(LoginActivity.this, "Password must be at least 6 character", Toast.LENGTH_SHORT).show();
-                              return;
+
                           }
-                          
                       }
                         
                     }
                     else{
                         Toast.makeText(LoginActivity.this, "Email is invalid!", Toast.LENGTH_SHORT).show();
-                        return;
+
                     }
                 }
 
@@ -128,5 +126,11 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

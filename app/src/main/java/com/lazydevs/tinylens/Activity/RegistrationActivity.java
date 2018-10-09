@@ -71,7 +71,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             Log.d("WhatIstheTask", "" + task);
                             FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                            validate();
+                            verification();
 
                             sendToDatabase(FirstName.getText().toString(), LastName.getText().toString(), Email.getText().toString());
 
@@ -108,7 +108,7 @@ public class RegistrationActivity extends AppCompatActivity {
         return currentFirebaseUser.getUid();
     }
 
-    void validate() {
+    void verification() {
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener() {

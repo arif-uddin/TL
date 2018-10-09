@@ -3,6 +3,7 @@ package com.lazydevs.tinylens.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -44,9 +45,6 @@ public class UploadImageActivity extends AppCompatActivity {
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
-
-    CountDownTimer cTimer;
-
 
     private Uri mImageUri;
 
@@ -145,7 +143,7 @@ public class UploadImageActivity extends AppCompatActivity {
 
     private void uploadFile() {
         if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+"_"+FirebaseAuth.getInstance().getUid()
                     + "." + getFileExtension(mImageUri));
 
             mUploadTask = fileReference.putFile(mImageUri)
@@ -156,7 +154,7 @@ public class UploadImageActivity extends AppCompatActivity {
                             fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Toast.makeText(UploadImageActivity.this, "Upload SuccessFul", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(UploadImageActivity.this, "Upload SuccessFul", Toast.LENGTH_SHORT).show();
                                     String uploadId = mDatabaseRef.push().getKey();
                                     ModelImage modelImage = new ModelImage(mEditTextFileName.getText().toString().trim(),
                                             uri.toString(), firebaseAuth.getCurrentUser().getUid(),uploadId);
@@ -175,6 +173,13 @@ public class UploadImageActivity extends AppCompatActivity {
                         @Override
                         public void onProgress(final UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            if(progress==100)
+                            {
+                                Toast.makeText(UploadImageActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
+                                mButtonUpload.setClickable(false);
+                                mButtonUpload.setBackgroundColor(Color.RED);
+                            }
+                            mProgressBar.setProgress((int) progress);
                             Log.e("Prr",""+progress);
 
                         }
@@ -190,19 +195,4 @@ public class UploadImageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showBtn(View view) {
-        Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
-    }
-
-
-    /*   public void showImages(View view) {
-
-
-
-       *//* Intent intent = new Intent(UploadImageActivity.this,ShowImagesActivity.class);
-        startActivity(intent);*//*
-
-
-
-    }*/
 }

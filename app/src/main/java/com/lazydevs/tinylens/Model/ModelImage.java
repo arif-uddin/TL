@@ -1,9 +1,7 @@
 package com.lazydevs.tinylens.Model;
 
-import com.google.firebase.database.Exclude;
-
 public class ModelImage {
-    private String mName;
+    private String title;
     private String date;
     private String mImageUrl;
     private String mKey;
@@ -18,18 +16,18 @@ public class ModelImage {
         if (name.trim().equals("")) {
             name = "No Name";
         }
-        this.mName = name;
+        this.title = name;
         this.mImageUrl = imageUrl;
         this.userID = userID;
         this.mKey = mKey;
     }
 
-    public String getmName() {
-        return mName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getmImageUrl() {
