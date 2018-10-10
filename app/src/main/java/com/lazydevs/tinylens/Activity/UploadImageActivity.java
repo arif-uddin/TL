@@ -191,7 +191,7 @@ public class UploadImageActivity extends AppCompatActivity {
 
     public void logOut(View view) {
         firebaseAuth.signOut();
-        Intent intent = new Intent(UploadImageActivity.this, RegistrationActivity.class);
+        Intent intent = new Intent(UploadImageActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 

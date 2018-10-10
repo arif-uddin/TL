@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
+        //finish();
     }
 
 
@@ -102,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            });showImagesAdapter.notifyDataSetChanged();
+            });
+            showImagesAdapter.notifyDataSetChanged();
 
         }
 

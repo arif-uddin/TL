@@ -4,7 +4,7 @@ public class ModelUser {
 
     String FirstName,LastName,Email;
 
-    ModelUser()
+    public ModelUser()
     {
 
     }

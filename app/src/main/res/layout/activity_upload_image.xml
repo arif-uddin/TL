@@ -30,7 +30,7 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
-        android:hint="Enter file name"
+        android:hint="Enter title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_choose_image"
         app:layout_constraintTop_toTopOf="parent" />
