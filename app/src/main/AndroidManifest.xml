@@ -20,8 +20,7 @@
             android:name=".Activity.RegistrationActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".Activity.UploadImageActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:name=".Activity.UploadImageActivity"/>
         <activity
             android:name=".Activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

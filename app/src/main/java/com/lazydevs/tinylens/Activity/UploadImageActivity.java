@@ -39,9 +39,8 @@ public class UploadImageActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 2;
 
-    private Button mButtonChooseImage, show;
+    private Button mButtonChooseImage;
     private Button mButtonUpload;
-    private TextView mTextViewShowUploads;
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -61,24 +60,23 @@ public class UploadImageActivity extends AppCompatActivity {
 
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.button_upload);
-        mTextViewShowUploads = findViewById(R.id.show_images);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
-        show = (Button) findViewById(R.id.show_images);
+        //show = (Button) findViewById(R.id.show_images);
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("images");
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-        show.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UploadImageActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        show.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(UploadImageActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
@@ -172,12 +170,14 @@ public class UploadImageActivity extends AppCompatActivity {
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(final UploadTask.TaskSnapshot taskSnapshot) {
+                            mButtonUpload.setVisibility(View.GONE);
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+
                             if(progress==100)
                             {
                                 Toast.makeText(UploadImageActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
-                                mButtonUpload.setClickable(false);
-                                mButtonUpload.setBackgroundColor(Color.RED);
+                                Intent intent = new Intent(UploadImageActivity.this, MainActivity.class);
+                                startActivity(intent);
                             }
                             mProgressBar.setProgress((int) progress);
                             Log.e("Prr",""+progress);
