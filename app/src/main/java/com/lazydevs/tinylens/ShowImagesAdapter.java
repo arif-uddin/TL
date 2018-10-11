@@ -55,6 +55,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
                 Intent intent=new Intent(context,PostDetailViewActivity.class);
                 intent.putExtra("image",images.get(i).getmImageUrl());
                 intent.putExtra("description",images.get(i).getDescription());
+                intent.putExtra("category",images.get(i).getCategory());
                 intent.putExtra("title",images.get(i).getTitle());
                 intent.putExtra("user_name",users.get(i).getFirstName()+" "+users.get(i).getLastName());
                 context.startActivity(intent);

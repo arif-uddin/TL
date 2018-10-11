@@ -12,11 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +38,7 @@ import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.R;
 
 
-public class UploadImageActivity extends AppCompatActivity {
+public class UploadImageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 2;
@@ -46,12 +49,16 @@ public class UploadImageActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
 
     private Uri mImageUri;
+    private String selceted_category;
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private FirebaseAuth firebaseAuth;
 
     private StorageTask mUploadTask;
+
+    private Spinner spinner_category;
+    ArrayAdapter<CharSequence> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,20 +71,19 @@ public class UploadImageActivity extends AppCompatActivity {
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
-        //show = (Button) findViewById(R.id.show_images);
+
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("images");
         firebaseAuth = FirebaseAuth.getInstance();
 
+        spinner_category=(Spinner)findViewById(R.id.spinner_category);
+        adapter=ArrayAdapter.createFromResource(this,R.array.photography_categories,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_category.setAdapter(adapter);
+        spinner_category.setOnItemSelectedListener(this);
 
-//        show.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(UploadImageActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+
 
 
         mButton_file_browse.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +171,7 @@ public class UploadImageActivity extends AppCompatActivity {
                                     //Toast.makeText(UploadImageActivity.this, "Upload SuccessFul", Toast.LENGTH_SHORT).show();
                                     String uploadId = mDatabaseRef.push().getKey();
                                     ModelImage modelImage = new ModelImage(mEditTextFileName.getText().toString().trim(),
-                                            uri.toString(), firebaseAuth.getCurrentUser().getUid(),uploadId,mEditTextDescription.getText().toString().trim());
+                                            uri.toString(), firebaseAuth.getCurrentUser().getUid(),uploadId,mEditTextDescription.getText().toString().trim(),selceted_category);
                                     mDatabaseRef.child(uploadId).setValue(modelImage);
                                 }
                             });
@@ -206,4 +212,13 @@ public class UploadImageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selceted_category=parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
