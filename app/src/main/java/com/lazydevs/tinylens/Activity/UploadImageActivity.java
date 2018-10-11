@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,9 +40,8 @@ public class UploadImageActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 2;
 
-    private Button mButtonChooseImage;
-    private Button mButtonUpload;
-    private EditText mEditTextFileName;
+    private Button mButtonUpload,mButton_file_browse;
+    private EditText mEditTextFileName,mEditTextDescription;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
 
@@ -58,8 +58,9 @@ public class UploadImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_image);
 
-        mButtonChooseImage = findViewById(R.id.button_choose_image);
+        mButton_file_browse=(Button)findViewById(R.id.file_browse);
         mButtonUpload = findViewById(R.id.button_upload);
+        mEditTextDescription = findViewById(R.id.edit_text_description);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
@@ -79,7 +80,15 @@ public class UploadImageActivity extends AppCompatActivity {
 //        });
 
 
-        mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
+        mButton_file_browse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+
+            }
+        });
+
+        mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
@@ -125,11 +134,12 @@ public class UploadImageActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
-
             Glide
                     .with(this)
                     .load(mImageUri)
                     .into(mImageView);
+            mImageView.setVisibility(ImageView.VISIBLE);
+            mButton_file_browse.setVisibility(Button.GONE);
         }
     }
 
@@ -155,7 +165,7 @@ public class UploadImageActivity extends AppCompatActivity {
                                     //Toast.makeText(UploadImageActivity.this, "Upload SuccessFul", Toast.LENGTH_SHORT).show();
                                     String uploadId = mDatabaseRef.push().getKey();
                                     ModelImage modelImage = new ModelImage(mEditTextFileName.getText().toString().trim(),
-                                            uri.toString(), firebaseAuth.getCurrentUser().getUid(),uploadId);
+                                            uri.toString(), firebaseAuth.getCurrentUser().getUid(),uploadId,mEditTextDescription.getText().toString().trim());
                                     mDatabaseRef.child(uploadId).setValue(modelImage);
                                 }
                             });
@@ -171,6 +181,7 @@ public class UploadImageActivity extends AppCompatActivity {
                         @Override
                         public void onProgress(final UploadTask.TaskSnapshot taskSnapshot) {
                             mButtonUpload.setVisibility(View.GONE);
+                            mProgressBar.setVisibility(View.VISIBLE);
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                             if(progress==100)

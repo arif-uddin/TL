@@ -2,6 +2,7 @@ package com.lazydevs.tinylens.Model;
 
 public class ModelImage {
     private String title;
+    private String description;
     private String date;
     private String mImageUrl;
     private String mKey;
@@ -12,11 +13,12 @@ public class ModelImage {
         //empty constructor needed
     }
 
-    public ModelImage(String name, String imageUrl, String userID, String mKey) {
+    public ModelImage(String name, String imageUrl, String userID, String mKey,String description) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
         this.title = name;
+        this.description = description;
         this.mImageUrl = imageUrl;
         this.userID = userID;
         this.mKey = mKey;
@@ -53,5 +55,9 @@ public class ModelImage {
     public void setUserID(String userID) {
         this.userID = userID;
     }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
 }
