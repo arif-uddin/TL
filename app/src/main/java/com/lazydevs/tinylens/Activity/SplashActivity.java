@@ -24,7 +24,7 @@ public class SplashActivity extends Activity {
         company = (TextView) findViewById(R.id.company);
 
 
-        slogan.setText("PUT YOUR SLOGAN HERE");
+        slogan.setText("I walk, I see, I stop, I photograph ");
 
 
         mWaitHandler.postDelayed(new Runnable() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -74,11 +75,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <Button
+                    <ImageButton
                         android:layout_width="60dp"
                         android:layout_height="30dp"
-                        android:text="Like"
-                        android:textSize="8dp"/>
+                        android:background="@color/colorAccent"
+                        android:src="@drawable/sharp_favorite_border_black_18dp" />
 
                 </LinearLayout>
 
