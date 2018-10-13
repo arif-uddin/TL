@@ -55,11 +55,11 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
 
         if(images.get(i).hasUserLiked)
         {
-            Toast.makeText(context, "I Liked Image : "+i, Toast.LENGTH_SHORT).show();
+            viewHolder.like.setImageResource(R.drawable.ic_favorite_black_24dp);
         }
         else
         {
-            Toast.makeText(context, "I Disliked Image : "+i, Toast.LENGTH_SHORT).show();
+            viewHolder.like.setImageResource(R.drawable.ic_favorite_border_black_24dp);
         }
 
 
@@ -72,6 +72,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
         });
 
 
+        viewHolder.counter.setText(images.get(i).like_counter+"");
         viewHolder.image_title.setText(images.get(i).getTitle());
         viewHolder.user_name.setText("By"+" "+users.get(i).getFirstName()+" "+users.get(i).getLastName());
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +97,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView user_name,image_title;
+        TextView user_name,image_title,counter;
         ImageView imageView;
         CardView cardView;
         ImageButton like;
@@ -109,6 +110,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
             imageView=itemView.findViewById(R.id.im_images);
             cardView=itemView.findViewById(R.id.cardView);
             like=itemView.findViewById(R.id.btn_like);
+            counter=itemView.findViewById(R.id.tv_like_counter);
         }
     }
 

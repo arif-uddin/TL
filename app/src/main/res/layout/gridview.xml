@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:layout_margin="15dp"
+        android:clickable="true"
         app:cardBackgroundColor="#FFF"
         app:cardCornerRadius="4dp"
-        android:layout_margin="15dp"
-        app:cardElevation="0dp"
-        android:id="@+id/cardView"
-        android:clickable="true"
-        >
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:orientation="vertical"
+                android:layout_weight="2"
                 >
 
                 <ImageView
@@ -41,50 +40,56 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"
-                   android:orientation="vertical">
-                   <TextView
-                       android:id="@+id/tv_name"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="Name"
-                       android:textColor="#000"
-                       android:textSize="10sp"
-                       />
-
-                   <TextView
-                       android:id="@+id/title"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="Title"
-                       android:textColor="#000"
-                       android:textSize="16sp"
-                       />
-
-               </LinearLayout>
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:gravity="right|center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/btn_like"
-                        android:clickable="true"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:background="@color/colorAccent"
-                        android:src="@drawable/sharp_favorite_border_black_18dp" />
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Title"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_like_counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="0" />
+
+                    <ImageButton
+                        android:id="@+id/btn_like"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@color/colorAccent"
+                        android:clickable="true"
+                        android:src="@drawable/ic_favorite_border_black_24dp" />
+
+                </LinearLayout>
 
 
             </LinearLayout>

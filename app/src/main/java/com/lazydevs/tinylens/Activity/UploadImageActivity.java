@@ -157,7 +157,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
 
     private void uploadFile() {
         if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+"_"+FirebaseAuth.getInstance().getUid()
+            final StorageReference fileReference = mStorageRef.child("images").child(System.currentTimeMillis()+"_"+FirebaseAuth.getInstance().getUid()
                     + "." + getFileExtension(mImageUri));
 
             mUploadTask = fileReference.putFile(mImageUri)

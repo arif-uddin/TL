@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
             });
             showImagesAdapter.notifyDataSetChanged();
 
-            Query qery2 = FirebaseDatabase.getInstance().getReference().child("likes");
-            qery2.orderByChild("imageKey").equalTo(modelImage.getmKey()).addChildEventListener(new ChildEventListener() {
+            Query query2 = FirebaseDatabase.getInstance().getReference().child("likes");
+            query2.orderByChild("imageKey").equalTo(modelImage.getmKey()).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     ModelLike modelLike = dataSnapshot.getValue(ModelLike.class);
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+
 
         }
 
