@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         users = new ArrayList<>();
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         showImagesAdapter = new ShowImagesAdapter(getApplicationContext(),images,users,MainActivity.this);
         recyclerView.setAdapter(showImagesAdapter);
 

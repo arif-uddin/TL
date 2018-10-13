@@ -20,11 +20,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        slogan = (TextView) findViewById(R.id.slogan);
         company = (TextView) findViewById(R.id.company);
-
-
-        slogan.setText("I walk, I see, I stop, I photograph ");
 
 
         mWaitHandler.postDelayed(new Runnable() {
