@@ -8,10 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.lazydevs.tinylens.Activity.MainActivity;
 import com.lazydevs.tinylens.Activity.PostDetailViewActivity;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelUser;
@@ -23,11 +26,13 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
     private final Context context;
     ArrayList<ModelImage> images;
     ArrayList<ModelUser> users;
+    MainActivity activity;
 
-    public ShowImagesAdapter(Context context, ArrayList<ModelImage> images, ArrayList<ModelUser> users) {
+    public ShowImagesAdapter(Context context, ArrayList<ModelImage> images, ArrayList<ModelUser> users,MainActivity activity) {
         this.context = context;
         this.images = images;
         this.users = users;
+        this.activity = activity;
     }
 
     @Override
@@ -46,6 +51,26 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
                 .with(context)
                 .load(images.get(i).getmImageUrl())
                 .into(viewHolder.imageView);
+
+
+        if(images.get(i).hasUserLiked)
+        {
+            Toast.makeText(context, "I Liked Image : "+i, Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "I Disliked Image : "+i, Toast.LENGTH_SHORT).show();
+        }
+
+
+        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                activity.likeHelper(images.get(i));
+            }
+        });
+
 
         viewHolder.image_title.setText(images.get(i).getTitle());
         viewHolder.user_name.setText("By"+" "+users.get(i).getFirstName()+" "+users.get(i).getLastName());
@@ -74,6 +99,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
         TextView user_name,image_title;
         ImageView imageView;
         CardView cardView;
+        ImageButton like;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +108,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
             image_title=itemView.findViewById(R.id.title);
             imageView=itemView.findViewById(R.id.im_images);
             cardView=itemView.findViewById(R.id.cardView);
+            like=itemView.findViewById(R.id.btn_like);
         }
     }
 

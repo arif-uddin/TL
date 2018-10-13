@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -21,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lazydevs.tinylens.Model.ModelImage;
+import com.lazydevs.tinylens.Model.ModelLike;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
 import com.lazydevs.tinylens.ShowImagesAdapter;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
-        showImagesAdapter = new ShowImagesAdapter(getApplicationContext(),images,users);
+        showImagesAdapter = new ShowImagesAdapter(getApplicationContext(),images,users,MainActivity.this);
         recyclerView.setAdapter(showImagesAdapter);
 
         if(firebaseUser==null)
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
+
         query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
 
     }
@@ -105,6 +106,49 @@ public class MainActivity extends AppCompatActivity {
             });
             showImagesAdapter.notifyDataSetChanged();
 
+            Query qery2 = FirebaseDatabase.getInstance().getReference().child("likes");
+            qery2.orderByChild("imageKey").equalTo(modelImage.getmKey()).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    ModelLike modelLike = dataSnapshot.getValue(ModelLike.class);
+                    modelImage.addLike();
+                    if(modelLike.getUserID().equals(FirebaseAuth.getInstance().getUid()))
+                    {
+                        modelImage.hasUserLiked=true;
+                        modelImage.like_Key = dataSnapshot.getKey();
+                    }
+                    showImagesAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    ModelLike modelLike = dataSnapshot.getValue(ModelLike.class);
+                    modelImage.removeLike();
+                    if(modelLike.getUserID().equals(FirebaseAuth.getInstance().getUid()))
+                    {
+                        modelImage.hasUserLiked=false;
+                        modelImage.like_Key = null;
+                    }
+                    showImagesAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
         }
 
         @Override
@@ -125,6 +169,28 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
+        }
+
+    }
+
+    public void likeHelper(ModelImage image)
+    {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        if(!image.hasUserLiked)
+        {
+            image.hasUserLiked=true;
+            ModelLike modelLike = new ModelLike(firebaseUser.getUid(),image.getmKey());
+            String key = databaseReference.child("likes").push().getKey();
+            databaseReference.child("likes").child(key).setValue(modelLike);
+            image.like_Key=key;
+        }
+        else
+        {
+            image.hasUserLiked=false;
+            if(image.like_Key!=null)
+            {
+                databaseReference.child("likes").child(image.like_Key).removeValue();
+            }
         }
 
     }

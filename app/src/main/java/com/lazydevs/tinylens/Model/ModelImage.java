@@ -1,5 +1,7 @@
 package com.lazydevs.tinylens.Model;
 
+import com.google.firebase.database.Exclude;
+
 public class ModelImage {
     private String title;
     private String description;
@@ -8,6 +10,29 @@ public class ModelImage {
     private String mImageUrl;
     private String mKey;
     private String userID;
+
+    @Exclude
+    public boolean hasUserLiked=false;
+
+    @Exclude
+    public int like_counter=0;
+
+    @Exclude
+    public String like_Key;
+
+
+    @Exclude
+    public void addLike()
+    {
+        this.like_counter++;
+    }
+
+    @Exclude
+    public void removeLike()
+    {
+        this.like_counter--;
+    }
+
 
 
     public ModelImage() {

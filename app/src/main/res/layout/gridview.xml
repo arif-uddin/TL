@@ -76,6 +76,8 @@
                     android:layout_weight="1">
 
                     <ImageButton
+                        android:id="@+id/btn_like"
+                        android:clickable="true"
                         android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:background="@color/colorAccent"
