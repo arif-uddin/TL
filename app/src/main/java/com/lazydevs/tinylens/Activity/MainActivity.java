@@ -1,12 +1,16 @@
 package com.lazydevs.tinylens.Activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,6 +30,8 @@ import com.lazydevs.tinylens.R;
 import com.lazydevs.tinylens.ShowImagesAdapter;
 
 import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
         users = new ArrayList<>();
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(5),true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
         showImagesAdapter = new ShowImagesAdapter(getApplicationContext(),images,users,MainActivity.this);
         recyclerView.setAdapter(showImagesAdapter);
 
@@ -195,6 +204,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
 
 }
 

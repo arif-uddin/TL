@@ -9,10 +9,9 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
         android:clickable="true"
         app:cardBackgroundColor="#FFF"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="2dp"
         app:cardElevation="0dp">
 
         <LinearLayout
@@ -68,7 +67,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right|center"
                     android:orientation="horizontal">

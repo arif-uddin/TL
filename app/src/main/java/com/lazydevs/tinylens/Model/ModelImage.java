@@ -21,13 +21,11 @@ public class ModelImage {
     public String like_Key;
 
 
-    @Exclude
     public void addLike()
     {
         this.like_counter++;
     }
 
-    @Exclude
     public void removeLike()
     {
         this.like_counter--;
