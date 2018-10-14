@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ic_splash_background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -25,15 +26,37 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:gravity="center|bottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="280dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_if_you_see_something_that_moves_you"/>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.wang.avi.AVLoadingIndicatorView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:indicatorName="LineScalePulseOutIndicator"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center|bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_if_you_see_something_that_moves_you"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

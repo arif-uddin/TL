@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp"
-    android:background="@drawable/background_gradient"
+    android:background="@drawable/ic_splash_background"
     >
 
     <LinearLayout
