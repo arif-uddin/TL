@@ -6,6 +6,7 @@ public class ModelImage {
     private String title;
     private String description;
     private String category;
+    private String mThumbUrl;
     private String date;
     private String mImageUrl;
     private String mKey;
@@ -37,10 +38,11 @@ public class ModelImage {
         //empty constructor needed
     }
 
-    public ModelImage(String name, String imageUrl, String userID, String mKey,String description,String category) {
+    public ModelImage(String name, String imageUrl,String mThumbUrl, String userID, String mKey,String description,String category) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
+        this.mThumbUrl=mThumbUrl;
         this.title = name;
         this.description = description;
         this.category = category;
@@ -51,6 +53,14 @@ public class ModelImage {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getmThumbUrl() {
+        return mThumbUrl;
+    }
+
+    public void setmThumbUrl(String mThumbUrl) {
+        this.mThumbUrl = mThumbUrl;
     }
 
     public void setTitle(String title) {

@@ -49,7 +49,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
 
         Glide
                 .with(context)
-                .load(images.get(i).getmImageUrl())
+                .load(images.get(i).getmThumbUrl())
                 .into(viewHolder.imageView);
 
 

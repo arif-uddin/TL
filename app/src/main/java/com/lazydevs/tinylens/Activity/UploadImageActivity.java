@@ -3,7 +3,9 @@ package com.lazydevs.tinylens.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -37,14 +39,16 @@ import com.google.firebase.storage.UploadTask;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.R;
 
+import java.io.ByteArrayOutputStream;
+
 
 public class UploadImageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 2;
 
-    private Button mButtonUpload,mButton_file_browse;
-    private EditText mEditTextFileName,mEditTextDescription;
+    private Button mButtonUpload, mButton_file_browse;
+    private EditText mEditTextFileName, mEditTextDescription;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
 
@@ -65,7 +69,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_image);
 
-        mButton_file_browse=(Button)findViewById(R.id.file_browse);
+        mButton_file_browse = (Button) findViewById(R.id.file_browse);
         mButtonUpload = findViewById(R.id.button_upload);
         mEditTextDescription = findViewById(R.id.edit_text_description);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
@@ -77,13 +81,11 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("images");
         firebaseAuth = FirebaseAuth.getInstance();
 
-        spinner_category=(Spinner)findViewById(R.id.spinner_category);
-        adapter=ArrayAdapter.createFromResource(this,R.array.photography_categories,android.R.layout.simple_spinner_item);
+        spinner_category = (Spinner) findViewById(R.id.spinner_category);
+        adapter = ArrayAdapter.createFromResource(this, R.array.photography_categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_category.setAdapter(adapter);
         spinner_category.setOnItemSelectedListener(this);
-
-
 
 
         mButton_file_browse.setOnClickListener(new View.OnClickListener() {
@@ -156,10 +158,15 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void uploadFile() {
+
         if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child("images").child(System.currentTimeMillis()+"_"+FirebaseAuth.getInstance().getUid()
+            final StorageReference fileReference = mStorageRef.child("images").child(System.currentTimeMillis() + "_" + FirebaseAuth.getInstance().getUid()
                     + "." + getFileExtension(mImageUri));
 
+            final StorageReference fileReference2 = mStorageRef.child("thumbs").child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            final byte[] data = compressImage();
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -168,11 +175,45 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
                             fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    //Toast.makeText(UploadImageActivity.this, "Upload SuccessFul", Toast.LENGTH_SHORT).show();
-                                    String uploadId = mDatabaseRef.push().getKey();
-                                    ModelImage modelImage = new ModelImage(mEditTextFileName.getText().toString().trim(),
-                                            uri.toString(), firebaseAuth.getCurrentUser().getUid(),uploadId,mEditTextDescription.getText().toString().trim(),selceted_category);
-                                    mDatabaseRef.child(uploadId).setValue(modelImage);
+
+                                    final Uri mainUri = uri;
+
+                                    fileReference2.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            fileReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
+                                                    Toast.makeText(UploadImageActivity.this, "Upload SuccessFul", Toast.LENGTH_SHORT).show();
+                                                    String uploadId = mDatabaseRef.push().getKey();
+                                                    ModelImage modelImage = new ModelImage(mEditTextFileName.getText().toString().trim(),
+                                                            mainUri.toString(),uri.toString(),firebaseAuth.getCurrentUser().getUid(), uploadId, mEditTextDescription.getText().toString().trim(), selceted_category);
+                                                    mDatabaseRef.child(uploadId).setValue(modelImage);
+                                                }
+                                            });
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                        }
+                                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                                            mButtonUpload.setVisibility(View.GONE);
+                                            mProgressBar.setVisibility(View.VISIBLE);
+                                            mProgressBar.setProgress((int) progress);
+                                            if (progress == 100) {
+                                                Toast.makeText(UploadImageActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(UploadImageActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                            }
+                                            Log.e("Prr", "" + progress);
+                                        }
+                                    });
+
+
                                 }
                             });
                         }
@@ -182,25 +223,8 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(UploadImageActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(final UploadTask.TaskSnapshot taskSnapshot) {
-                            mButtonUpload.setVisibility(View.GONE);
-                            mProgressBar.setVisibility(View.VISIBLE);
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-
-                            if(progress==100)
-                            {
-                                Toast.makeText(UploadImageActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(UploadImageActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            }
-                            mProgressBar.setProgress((int) progress);
-                            Log.e("Prr",""+progress);
-
-                        }
                     });
+
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
@@ -214,11 +238,22 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selceted_category=parent.getItemAtPosition(position).toString();
+        selceted_category = parent.getItemAtPosition(position).toString();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    byte[] compressImage()
+    {
+        mImageView.setDrawingCacheEnabled(true);
+        mImageView.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+        byte[] data = baos.toByteArray();
+        return  data;
     }
 }
