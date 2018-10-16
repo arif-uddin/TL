@@ -61,6 +61,39 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     public void register(View view) {
+        if(validate())
+        {
+            registerUser();
+        }
+
+    }
+
+    boolean validate()
+    {   if (!helper.isNameValid(FirstName.getText().toString()))// && helper.isPasswordValid(PassWord.getText().toString()))))
+        {
+            Toast.makeText(this, "First Name invalid", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(!helper.isNameValid(LastName.getText().toString()))
+        {
+            Toast.makeText(this, "Last Name invalid", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if (!helper.isEmailValid(Email.getText().toString()))
+        {
+            Toast.makeText(this, "Email invalid", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if (!helper.isPasswordValid(PassWord.getText().toString()))
+        {
+            Toast.makeText(this, "Password invalid", Toast.LENGTH_SHORT).show();
+            return false;
+        }else
+            {
+                 return true;
+            }
+    }
+
+
+    void registerUser()
+        {
         firebaseAuth.createUserWithEmailAndPassword(Email.getText().toString(), PassWord.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -96,7 +129,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 });
     }
-
     void sendToDatabase(String firstName, String lastName, String email) {
         DatabaseReference databaseReference = firebaseDatabase.getReference("users");
         ModelUser user = new ModelUser(firstName, lastName, email);
