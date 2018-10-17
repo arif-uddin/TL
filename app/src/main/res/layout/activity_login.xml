@@ -8,94 +8,161 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp"
-    android:background="@drawable/ic_splash_background"
+    android:background="@drawable/ic_login_background"
     >
 
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3">
+        android:layout_weight="3.5">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tiny Lens"
-            android:textSize="30dp"
+            android:text="LOGIN"
+            android:textSize="35sp"
+            android:textColor="#ecf0f1"
             />
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
-            android:padding="10dp"
+
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2.5"
             android:orientation="vertical">
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:id="@+id/et_email"
-                android:gravity="center"
-                />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <EditText
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:id="@+id/et_pass"
-                android:inputType="textPassword"
-                android:gravity="center"
-                />
-            <TextView
-                android:clickable="true"
-                android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Forget Password?"
-                android:textColor="#0612ba"
-                android:id="@+id/tv_forget_pass"/>
+                <EditText
+                    android:id="@+id/et_email"
+                    android:background="@drawable/ic_tl_edit_text_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Email"
+                    android:textColorHint="#8e8e8e"
+                    android:textColor="#000000"
+                    android:inputType="textEmailAddress"
+                    android:gravity="center"
+                    />
 
-            <Button
-                android:background="@drawable/rounded_button"
+
+                    <EditText
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/ic_tl_edit_text_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:textColorHint="#8e8e8e"
+                        android:hint="Password"
+                        android:textColor="#000000"
+                        android:id="@+id/et_pass"
+                        android:inputType="textPassword"
+                        android:gravity="center"
+                        />
+
+                <TextView
+                    android:clickable="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Forget Password?"
+                    android:textColor="#ecf0f1"
+                    android:id="@+id/tv_forget_pass"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:textColor="#fff"
-                android:text="Login"
-                android:textSize="15dp"
-                android:id="@+id/bt_login"
-                />
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <ImageButton
+                    android:id="@+id/bt_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_done_button" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
         <LinearLayout
-            android:gravity="center|bottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="3"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Don't have an Account? Register Now"
-                android:clickable="true"
-                android:textColor="#92f2ef"
-                android:id="@+id/bt_register"
-                />
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONNECT WITH"
+                    android:textSize="15sp"
+                    android:textColor="#ecf0f1"
+                    android:layout_marginBottom="10sp"
+                    />
+
+                <ImageButton
+                    android:background="@color/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_google_custom_button"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center|bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have Account? "
+                    android:textColor="#000000"
+                    />
+                <TextView
+                    android:id="@+id/bt_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CREATE AN ACCOUNT "
+                    android:textSize="14sp"
+                    android:clickable="true"
+                    android:textColor="#ecf0f1"
+                    />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

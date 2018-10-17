@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,14 +14,16 @@ import com.lazydevs.tinylens.R;
 
 public class SplashActivity extends Activity {
     private Handler mWaitHandler = new Handler();
-    TextView slogan, company;
+    ImageView slogan,company;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        company = (TextView) findViewById(R.id.company);
+        company = (ImageView) findViewById(R.id.company);
+        slogan = (ImageView) findViewById(R.id.slogan);
+
 
 
         mWaitHandler.postDelayed(new Runnable() {
