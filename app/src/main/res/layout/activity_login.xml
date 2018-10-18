@@ -51,12 +51,12 @@
 
                 <EditText
                     android:id="@+id/et_email"
+                    android:textColorHint="#8e8e8e"
+                    android:textColor="#000000"
                     android:background="@drawable/ic_tl_edit_text_box"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:hint="Email"
-                    android:textColorHint="#8e8e8e"
-                    android:textColor="#000000"
                     android:inputType="textEmailAddress"
                     android:gravity="center"
                     />
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CONNECT WITH"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textColor="#ecf0f1"
                     android:layout_marginBottom="10sp"
                     />
@@ -148,6 +148,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="10sp"
                     android:text="Don't have Account? "
                     android:textColor="#000000"
                     />
@@ -156,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CREATE AN ACCOUNT "
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:clickable="true"
                     android:textColor="#ecf0f1"
                     />
