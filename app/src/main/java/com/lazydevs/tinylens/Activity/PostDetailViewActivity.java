@@ -5,19 +5,27 @@ import android.media.Image;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.lazydevs.tinylens.Model.ModelComment;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
+
+import java.util.ArrayList;
 
 public class PostDetailViewActivity extends AppCompatActivity {
 
 
      TextView title,user_name,description,category;
      ImageView imageView;
+
+     //for comment
+     RecyclerView recyclerView_comment;
+     ArrayList<ModelComment> comments;
 
 
     @Override
@@ -29,6 +37,11 @@ public class PostDetailViewActivity extends AppCompatActivity {
         imageView=(ImageView)findViewById(R.id.im_images);
         user_name=(TextView)findViewById(R.id.tv_name);
         category=(TextView)findViewById(R.id.category);
+
+        //for comment
+        recyclerView_comment = findViewById(R.id.recyclerView_comment);
+        comments = new ArrayList<>();
+
 
         Glide
                 .with(getApplicationContext())
