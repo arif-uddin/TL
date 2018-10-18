@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:clickable="true"
-        app:cardBackgroundColor="#FFF"
+        app:cardBackgroundColor="#ecf0f1"
         app:cardCornerRadius="2dp"
         app:cardElevation="0dp">
 
@@ -88,7 +88,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@color/colorAccent"
                         android:clickable="true"
-                        android:src="@drawable/ic_favorite_border_black_24dp" />
+                        android:src="@drawable/ic_not_like_icon" />
 
                 </LinearLayout>
 

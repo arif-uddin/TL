@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
     public void upload(View view) {
         Intent intent = new Intent(MainActivity.this,UploadImageActivity.class);
         startActivity(intent);
+        this.overridePendingTransition(0, 0);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //finish();
     }
 
 

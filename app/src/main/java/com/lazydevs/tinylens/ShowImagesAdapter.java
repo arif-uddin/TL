@@ -55,11 +55,11 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
 
         if(images.get(i).hasUserLiked)
         {
-            viewHolder.like.setImageResource(R.drawable.ic_favorite_black_24dp);
+            viewHolder.like.setImageResource(R.drawable.ic_like_icon);
         }
         else
         {
-            viewHolder.like.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+            viewHolder.like.setImageResource(R.drawable.ic_not_like_icon);
         }
 
 

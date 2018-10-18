@@ -47,7 +47,8 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 2;
 
-    private Button mButtonUpload, mButton_file_browse;
+    private Button mButtonUpload;
+    private ImageButton mButton_file_browse;
     private EditText mEditTextFileName, mEditTextDescription;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -69,7 +70,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_image);
 
-        mButton_file_browse = (Button) findViewById(R.id.file_browse);
+        mButton_file_browse = (ImageButton) findViewById(R.id.file_browse);
         mButtonUpload = findViewById(R.id.button_upload);
         mEditTextDescription = findViewById(R.id.edit_text_description);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
@@ -116,6 +117,12 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
 
 
     }
+
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
 
     private void openFileChooser() {
         Intent intent = new Intent();

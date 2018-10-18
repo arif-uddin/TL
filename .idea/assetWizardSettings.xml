@@ -30,11 +30,11 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="6b6b6b" />
-                            <entry key="height" value="1866" />
-                            <entry key="outputName" value="ic_sign_up_background" />
+                            <entry key="height" value="83" />
+                            <entry key="outputName" value="ic_upload_icon" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\Kabbo\Desktop\TL-UI\sign_up_background.svg" />
-                            <entry key="width" value="1080" />
+                            <entry key="sourceFile" value="C:\Users\Kabbo\Desktop\TL-UI\upload_icon.svg" />
+                            <entry key="width" value="93" />
                           </map>
                         </option>
                       </PersistentState>
