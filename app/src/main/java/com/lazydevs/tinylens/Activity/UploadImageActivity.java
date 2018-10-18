@@ -263,4 +263,29 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         byte[] data = baos.toByteArray();
         return  data;
     }
+
+    public void bt_home_upload(View view) {
+        Intent intent = new Intent(UploadImageActivity.this,MainActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
+    }
+
+    public void bt_search_upload(View view) {
+        Intent intent = new Intent(UploadImageActivity.this,SearchActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
+
+    }
+
+    public void bt_notification_upload(View view) {
+        Intent intent = new Intent(UploadImageActivity.this,NotificationActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
+    }
+
+    public void bt_user_upload(View view) {
+        Intent intent = new Intent(UploadImageActivity.this,ProfileActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
+    }
 }

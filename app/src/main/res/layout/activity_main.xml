@@ -119,6 +119,7 @@
                 android:src="@drawable/ic_main_bar_search_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="bt_search_main"
                 />
 
         </LinearLayout>
@@ -138,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/bt_upload_image"
                 android:text="Upload"
-                android:onClick="upload"
+                android:onClick="bt_upload_main"
                 />
 
         </LinearLayout>
@@ -155,6 +156,7 @@
                 android:src="@drawable/ic_main_bar_notification_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="bt_notification_main"
                 />
 
         </LinearLayout>
@@ -171,6 +173,7 @@
                 android:src="@drawable/ic_main_bar_user_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="bt_user_main"
                 />
 
         </LinearLayout>

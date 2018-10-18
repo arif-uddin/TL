@@ -79,15 +79,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void upload(View view) {
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    public void bt_upload_main(View view) {
         Intent intent = new Intent(MainActivity.this,UploadImageActivity.class);
         startActivity(intent);
         this.overridePendingTransition(0, 0);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    public void bt_search_main(View view) {
+        Intent intent= new Intent(MainActivity.this,SearchActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
+    }
+
+    public void bt_notification_main(View view) {
+        Intent intent= new Intent(MainActivity.this,NotificationActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
+    }
+
+    public void bt_user_main(View view) {
+        Intent intent= new Intent(MainActivity.this,ProfileActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
     }
 
 
