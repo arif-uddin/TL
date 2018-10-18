@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         images = new ArrayList<>();
         users = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView_home);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(5),true));
         ((DefaultItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
