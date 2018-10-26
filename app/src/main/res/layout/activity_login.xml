@@ -15,7 +15,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3.5">
+        android:layout_weight="2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             android:layout_marginLeft="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_weight="1.7"
             android:orientation="vertical">
 
             <LinearLayout
@@ -131,8 +131,8 @@
 
                 <ImageButton
                     android:background="@color/colorAccent"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_google_custom_button"/>
 

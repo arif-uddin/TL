@@ -13,9 +13,7 @@ public class ModelComment {
         this.userID = userID;
         this.imageKey = imageKey;
         this.comment = comment;
-
     }
-
 
     public String getUserID() {
         return userID;
