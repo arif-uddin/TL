@@ -41,17 +41,19 @@
         <activity
             android:name=".Activity.PostDetailViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.SearchActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            />
-        <activity android:name=".Activity.NotificationActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            />
-        <activity android:name=".Activity.ProfileActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Activity.NotificationActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Activity.ProfileActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
-        </activity>
+        <activity
+            android:name=".Activity.VarificationActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" ></activity>
     </application>
 
 </manifest>
