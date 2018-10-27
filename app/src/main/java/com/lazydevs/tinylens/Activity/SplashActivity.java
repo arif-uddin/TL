@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,11 +37,12 @@ public class SplashActivity extends Activity {
                     Intent intent;
                     //Let's Finish Splash Activity since we don't want to show this when user press back showOnMap.
                     if (user!=null){
+                        user.reload();
                         if(user.isEmailVerified()) {
                             intent = new Intent(SplashActivity.this, MainActivity.class);
                             startActivity(intent);
                         }else{
-                            intent = new Intent(SplashActivity.this, VarificationActivity.class);
+                            intent = new Intent(SplashActivity.this, VerificationActivity.class);
                             startActivity(intent);
                             }
                     } else

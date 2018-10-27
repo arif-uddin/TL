@@ -13,28 +13,6 @@
         android:layout_height="0dp"
         android:layout_weight=".8">
 
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:src="@drawable/ic_back_button_icon" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
@@ -79,43 +57,73 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4">
+                android:layout_weight="3">
 
-                <Spinner
-                    android:id="@+id/spinner_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                </Spinner>
-
-                <EditText
-                    android:id="@+id/edit_text_file_name"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Title/Caption"/>
+                    android:layout_height="0dp"
+                    android:layout_weight="1.2">
 
-                <EditText
-                    android:id="@+id/edit_text_description"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Category: "
+                        android:textColor="#848484"
+                        android:textSize="19sp"/>
+
+                    <Spinner
+                        android:id="@+id/spinner_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></Spinner>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Description/Story"/>
+                    android:layout_height="0dp"
+                    android:layout_weight="5">
 
+
+                    <EditText
+                        android:textSize="19sp"
+                        android:textColor="#000000"
+                        android:id="@+id/edit_text_file_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Title/Caption"
+                        android:textColorHint="#848484"/>
+
+                    <EditText
+                        android:textSize="19sp"
+                        android:textColor="#000000"
+                        android:id="@+id/edit_text_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Description/Story"
+                        android:textColorHint="#848484"/>
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="10dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <Button
+                <ImageButton
                     android:id="@+id/button_upload"
-                    android:layout_width="200dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
-                    android:text="Upload"/>
+                    android:background="@color/colorAccent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_upload_button" />
 
                 <ProgressBar
                     android:visibility="gone"

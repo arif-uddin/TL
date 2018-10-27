@@ -49,11 +49,12 @@
         <activity
             android:name=".Activity.ProfileActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".Activity.VarificationActivity"
+        <activitys
+            android:name=".Activity.VerificationActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".Activity.ForgotPasswordActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+
     </application>
 
 </manifest>
