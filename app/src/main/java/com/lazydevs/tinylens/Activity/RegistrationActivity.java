@@ -114,6 +114,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(RegistrationActivity.this, "Please verify your Email!!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegistrationActivity.this, VerificationActivity.class);
+                                startActivity(intent);
                             }
                             Toast.makeText(RegistrationActivity.this, "Successful, Please verify your Email!!", Toast.LENGTH_SHORT).show();
                             //updateUI(user);

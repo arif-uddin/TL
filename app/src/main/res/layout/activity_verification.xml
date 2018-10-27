@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.VarificationActivity"
-    android:background="#ecf0f1">
+    tools:context=".Activity.VerificationActivity"
+    android:background="@drawable/ic_sign_up_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,9 +23,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please varify your account,\n Then proceed!"
+                android:text="Please verify your account,\n Then proceed!"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#ecf0f1"
                 android:textSize="24sp" />
 
         </LinearLayout>
@@ -37,23 +37,23 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_done_button"
-                android:scaleType="fitCenter"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:background="@color/colorAccent"
                 android:onClick="enterApp"
-                />
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_done_button" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Resend varification email."
+                android:text="Resend verification email."
                 android:clickable="true"
-                android:textColor="#000"
+                android:textColor="#ecf0f1"
                 android:gravity="bottom|center"
-                android:textSize="20sp"
-                android:onClick="resendVarification"
+                android:textSize="17sp"
+                android:onClick="resendVerification"
                 />
         </LinearLayout>
 

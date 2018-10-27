@@ -52,7 +52,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
         <activity
-            android:name=".Activity.VarificationActivity"
+            android:name=".Activity.VerificationActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" ></activity>
     </application>
 
