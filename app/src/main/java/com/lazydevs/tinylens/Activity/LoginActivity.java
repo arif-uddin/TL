@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageButton login;
     FirebaseAuth firebaseAuth;
     Helper helper;
+    TextView forgetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         pass= (EditText)findViewById(R.id.et_pass);
         Register = (TextView) findViewById(R.id.bt_register);
         login = (ImageButton) findViewById(R.id.bt_login);
+        forgetPassword = (TextView)findViewById(R.id.tv_forget_pass_la);
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,11 +51,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 helper=new Helper();
-                String Email = email.getText().toString();
+                String Email = email.getText().toString().replaceAll(" ","");
                 String Pass = pass.getText().toString();
                 if (Email.isEmpty())
                 {
@@ -112,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             if(user!=null)
                             {
-                                Toast.makeText(LoginActivity.this, "Login SuccessFull", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login Successfull!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intent);
                             }
@@ -120,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed!",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }

@@ -107,7 +107,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             verification();
 
-                            sendToDatabase(FirstName.getText().toString(), LastName.getText().toString(), Email.getText().toString());
+                            sendToDatabase(FirstName.getText().toString(), LastName.getText().toString(), Email.getText().toString().replaceAll(" ",""));
 
                             if (user.isEmailVerified()) {
                                 Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
