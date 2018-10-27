@@ -47,8 +47,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 2;
 
-    private Button mButtonUpload;
-    private ImageButton mButton_file_browse;
+    private ImageButton mButton_file_browse,mButtonUpload;
     private EditText mEditTextFileName, mEditTextDescription;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -83,7 +82,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         firebaseAuth = FirebaseAuth.getInstance();
 
         spinner_category = (Spinner) findViewById(R.id.spinner_category);
-        adapter = ArrayAdapter.createFromResource(this, R.array.photography_categories, android.R.layout.simple_spinner_item);
+        adapter = ArrayAdapter.createFromResource(this, R.array.photography_categories, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_category.setAdapter(adapter);
         spinner_category.setOnItemSelectedListener(this);
@@ -208,8 +207,6 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
                                         @Override
                                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                                            mButtonUpload.setVisibility(View.GONE);
-                                            mProgressBar.setVisibility(View.VISIBLE);
                                             mProgressBar.setProgress((int) progress);
                                             if (progress == 100) {
                                                 Toast.makeText(UploadImageActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
@@ -255,6 +252,8 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
 
     byte[] compressImage()
     {
+        mButtonUpload.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
         mImageView.setDrawingCacheEnabled(true);
         mImageView.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
