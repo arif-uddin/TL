@@ -1,18 +1,13 @@
 package com.lazydevs.tinylens.Activity;
 
-import android.content.Context;
-import android.media.Image;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lazydevs.tinylens.Model.ModelComment;
-import com.lazydevs.tinylens.Model.ModelImage;
-import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
 
 import java.util.ArrayList;

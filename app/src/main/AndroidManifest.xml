@@ -49,9 +49,10 @@
         <activity
             android:name=".Activity.ProfileActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activitys
+        <activity
             android:name=".Activity.VerificationActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity android:name=".Activity.ForgotPasswordActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
