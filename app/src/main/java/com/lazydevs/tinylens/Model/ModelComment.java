@@ -2,7 +2,7 @@ package com.lazydevs.tinylens.Model;
 
 public class ModelComment {
 
-    String userID,imageKey,comment;
+    String userID,imageKey,comment_text;
 
     public ModelComment()
     {
@@ -12,7 +12,7 @@ public class ModelComment {
     public ModelComment(String userID, String imageKey, String comment) {
         this.userID = userID;
         this.imageKey = imageKey;
-        this.comment = comment;
+        this.comment_text = comment;
     }
 
     public String getUserID() {
@@ -32,11 +32,11 @@ public class ModelComment {
     }
 
     public String getComment() {
-        return comment;
+        return comment_text;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.comment_text = comment;
     }
 
 }

@@ -20,8 +20,8 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        company = (ImageView) findViewById(R.id.company);
-        slogan = (ImageView) findViewById(R.id.slogan);
+        company = findViewById(R.id.company);
+        slogan = findViewById(R.id.slogan);
 
 
 

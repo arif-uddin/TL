@@ -2,7 +2,11 @@ package com.lazydevs.tinylens.Model;
 
 public class ModelUser {
 
-    String FirstName,LastName,Email;
+    String FirstName;
+    String LastName;
+    String Email;
+    String UserPhotoUrl;
+
 
     public ModelUser()
     {
@@ -38,5 +42,14 @@ public class ModelUser {
     public void setEmail(String email) {
         Email = email;
     }
+
+    public String getUserPhotoUrl() {
+        return UserPhotoUrl;
+    }
+
+    public void setUserPhotoUrl(String userPhotoUrl) {
+        UserPhotoUrl = userPhotoUrl;
+    }
+
 
 }

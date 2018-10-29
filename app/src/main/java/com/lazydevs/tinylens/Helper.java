@@ -73,12 +73,7 @@ public class Helper {
 
     public boolean isNumberValid(String number)
     {
-        if(number.length()>7 && number.length()<=14)
-        {
-            return true;
-        }
-        else
-            return false;
+        return number.length() > 7 && number.length() <= 14;
     }
 
     public Typeface init_TypeFace(String name)
@@ -90,12 +85,7 @@ public class Helper {
 
     public boolean isPasswordValid(String password)
     {
-        if(password.length()>=6 )
-        {
-            return true;
-        }
-        else
-            return false;
+        return password.length() >= 6;
     }
 
 
