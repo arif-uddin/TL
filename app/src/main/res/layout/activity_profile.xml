@@ -21,8 +21,6 @@
             android:layout_height="match_parent"
             android:text="Profile"
             android:textSize="20sp"/>
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -124,6 +122,13 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+        <Button
+            android:onClick="btn_logout"
+            android:text="logout"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         </ScrollView>
 

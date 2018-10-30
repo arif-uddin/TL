@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lazydevs.tinylens.Helper;
 import com.lazydevs.tinylens.R;
+import com.wang.avi.AVLoadingIndicatorView;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     Helper helper;
     TextView forgetPassword;
+    AVLoadingIndicatorView loginIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.et_email);
         pass= findViewById(R.id.et_pass);
         Register = findViewById(R.id.bt_register);
-        login = findViewById(R.id.bt_login);
+        login = (ImageButton) findViewById(R.id.bt_login);
         forgetPassword = findViewById(R.id.tv_forget_pass_la);
+        loginIndicator=(AVLoadingIndicatorView)findViewById(R.id.login_indicator);
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +92,9 @@ public class LoginActivity extends AppCompatActivity {
                           if(isPasswordValid)
                           {
                               loginUser(Email,Pass);
+                              login.setVisibility(ImageButton.GONE);
+                              loginIndicator.setVisibility(AVLoadingIndicatorView.VISIBLE);
+
                           }
                           
                           else 
@@ -129,6 +135,9 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             //updateUI(user);
                         } else {
+                            login.setVisibility(ImageButton.VISIBLE);
+                            loginIndicator.setVisibility(AVLoadingIndicatorView.GONE);
+
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed!",

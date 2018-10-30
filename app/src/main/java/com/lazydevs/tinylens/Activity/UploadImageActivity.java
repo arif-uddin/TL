@@ -231,11 +231,6 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
-    public void logOut(View view) {
-        firebaseAuth.signOut();
-        Intent intent = new Intent(UploadImageActivity.this, LoginActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

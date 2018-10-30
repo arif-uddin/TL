@@ -96,12 +96,23 @@
                 android:layout_weight="2.5">
 
                 <ImageButton
+
                     android:id="@+id/bt_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/colorAccent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_done_button" />
+
+                <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/login_indicator"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:indicatorName="BallScaleMultipleIndicator"
+                    />
+
+
 
             </LinearLayout>
 
