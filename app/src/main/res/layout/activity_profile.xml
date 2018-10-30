@@ -15,28 +15,6 @@
         android:layout_height="0dp"
         android:layout_weight=".8">
 
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:src="@drawable/ic_back_button_icon" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
@@ -47,12 +25,12 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:textColor="#000"
+        <Button
+            android:onClick="btn_logout"
+            android:text="logout"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="This is profile activity"/>
-
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
