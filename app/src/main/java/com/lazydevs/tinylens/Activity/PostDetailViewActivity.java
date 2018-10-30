@@ -27,11 +27,11 @@ public class PostDetailViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail_view);
-        title=(TextView)findViewById(R.id.title);
-        description=(TextView)findViewById(R.id.description);
-        imageView=(ImageView)findViewById(R.id.im_images);
-        user_name=(TextView)findViewById(R.id.tv_name);
-        category=(TextView)findViewById(R.id.category);
+        title= findViewById(R.id.title);
+        description= findViewById(R.id.description);
+        imageView= findViewById(R.id.im_images);
+        user_name= findViewById(R.id.tv_name);
+        category= findViewById(R.id.category);
 
         //for comment
         recyclerView_comment = findViewById(R.id.recyclerView_comment);

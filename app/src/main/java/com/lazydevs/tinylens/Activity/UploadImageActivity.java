@@ -4,11 +4,9 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,7 +20,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -69,7 +66,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_image);
 
-        mButton_file_browse = (ImageButton) findViewById(R.id.file_browse);
+        mButton_file_browse = findViewById(R.id.file_browse);
         mButtonUpload = findViewById(R.id.button_upload);
         mEditTextDescription = findViewById(R.id.edit_text_description);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
@@ -81,7 +78,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("images");
         firebaseAuth = FirebaseAuth.getInstance();
 
-        spinner_category = (Spinner) findViewById(R.id.spinner_category);
+        spinner_category = findViewById(R.id.spinner_category);
         adapter = ArrayAdapter.createFromResource(this, R.array.photography_categories, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_category.setAdapter(adapter);
