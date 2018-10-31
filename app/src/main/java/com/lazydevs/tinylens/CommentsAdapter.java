@@ -23,7 +23,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     ArrayList<ModelUser> users;
     
 
-    public CommentsAdapter(Context context, ArrayList<ModelComment> comments, ArrayList<ModelUser> users, PostDetailViewActivity postDetailViewActivity) {
+    public CommentsAdapter(Context context, ArrayList<ModelComment> comments, ArrayList<ModelUser> users) {
         this.context = context;
         this.comments = comments;
         this.users = users;
