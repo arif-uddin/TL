@@ -66,6 +66,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
 
 
 
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("comments");
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,7 +83,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         recyclerView_comment.setHasFixedSize(true);
         LinearLayoutManager linearVertical = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView_comment.setLayoutManager(linearVertical);
-        commentsAdapter = new CommentsAdapter(getApplicationContext(),comments,users,PostDetailViewActivity.this);
+        commentsAdapter = new CommentsAdapter(getApplicationContext(),comments,users);
         recyclerView_comment.setAdapter(commentsAdapter);
 
 
@@ -148,7 +149,6 @@ public class PostDetailViewActivity extends AppCompatActivity {
                     {
 
                     }
-
                     commentsAdapter.setValues(modelComment,modelUser);
                     commentsAdapter.notifyDataSetChanged();
                 }
