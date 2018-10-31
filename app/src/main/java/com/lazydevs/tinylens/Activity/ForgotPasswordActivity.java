@@ -48,5 +48,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
 
-
+    public void btn_back_forget_password(View view) {
+        Intent intent= new Intent(ForgotPasswordActivity.this,LoginActivity.class);
+        startActivity(intent);
+    }
 }

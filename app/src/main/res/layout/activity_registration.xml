@@ -12,18 +12,44 @@
     >
 
     <LinearLayout
-        android:gravity="center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3">
 
-        <TextView
-            android:textColor="#ecf0f1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SIGN UP"
-            android:textSize="35sp"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:onClick="btn_back_signup"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_back_button_icon"
+                android:background="@color/colorAccent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:textColor="#ecf0f1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIGN UP"
+                android:textSize="35sp"
+                />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -35,6 +61,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_width="match_parent"
@@ -96,7 +123,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:orientation="vertical">
 
             <LinearLayout
@@ -105,7 +132,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight=".7">
 
                 <ImageButton
                     android:id="@+id/bt_registration_register"
@@ -115,6 +142,14 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_done_button"
                     android:onClick="register"
+                    />
+
+                <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/sign_up_indicator"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:indicatorName="BallScaleMultipleIndicator"
                     />
 
             </LinearLayout>

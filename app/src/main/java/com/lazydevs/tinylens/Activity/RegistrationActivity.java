@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.lazydevs.tinylens.Helper;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
+import com.wang.avi.AVLoadingIndicatorView;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class RegistrationActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     FirebaseStorage firebaseStorage;
     Helper helper;
+    AVLoadingIndicatorView sign_up_indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class RegistrationActivity extends AppCompatActivity {
         Email = findViewById(R.id.et_registration_email);
         PassWord = findViewById(R.id.et_registration_pass);
         Register = findViewById(R.id.bt_registration_register);
+        sign_up_indicator=(AVLoadingIndicatorView)findViewById(R.id.sign_up_indicator);
     }
 
     @Override
@@ -64,6 +67,8 @@ public class RegistrationActivity extends AppCompatActivity {
     public void register(View view) {
         if(validate())
         {
+            Register.setVisibility(ImageButton.GONE);
+            sign_up_indicator.setVisibility(AVLoadingIndicatorView.VISIBLE);
             registerUser();
         }
 
@@ -125,6 +130,8 @@ public class RegistrationActivity extends AppCompatActivity {
                             //Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(RegistrationActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            Register.setVisibility(ImageButton.VISIBLE);
+                            sign_up_indicator.setVisibility(AVLoadingIndicatorView.GONE);
                             //updateUI(null);
                         }
 
@@ -168,4 +175,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
+    public void btn_back_signup(View view) {
+        Intent intent=new Intent(RegistrationActivity.this,LoginActivity.class);
+        startActivity(intent);
+    }
 }
