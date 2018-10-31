@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -70,6 +71,8 @@ public class PostDetailViewActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
+        users = new ArrayList<>();
+        comments = new ArrayList<>();
         //for comment
         commentString=(EditText) findViewById(R.id.et_new_comment);
         postCommennt=(ImageButton)findViewById(R.id.btn_post_comment);
@@ -97,7 +100,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         final String mKey= getIntent().getExtras().getString("image_key");
 
         Query query = FirebaseDatabase.getInstance().getReference().child("comments");
-        //query.addChildEventListener(new QueryForComments());
+        query.addChildEventListener(new QueryForComments());
 
 
         postCommennt.setOnClickListener(new View.OnClickListener() {
@@ -128,13 +131,24 @@ public class PostDetailViewActivity extends AppCompatActivity {
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             final ModelComment modelComment = dataSnapshot.getValue(ModelComment.class);
+            Log.d("Comment",""+modelComment.getComment());
+            Log.d("Key",""+modelComment.getComment());
 
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.orderByChild("mKey").equalTo(modelComment.getImageKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.child(modelComment.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ModelUser  modelUser = dataSnapshot.getValue(ModelUser.class);
+                    try
+                    {
+                        Log.d("User",""+modelUser.getFirstName());
+                    }
+                    catch(NullPointerException E)
+                    {
 
-                    ModelUser  modelUser= dataSnapshot.getValue(ModelUser.class);
+                    }
+
                     commentsAdapter.setValues(modelComment,modelUser);
                     commentsAdapter.notifyDataSetChanged();
                 }

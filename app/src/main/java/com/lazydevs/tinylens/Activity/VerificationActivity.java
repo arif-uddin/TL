@@ -15,13 +15,19 @@ import com.lazydevs.tinylens.R;
 
 public class VerificationActivity extends AppCompatActivity {
 
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
-    }
 
-    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user.reload();
+        if (user.isEmailVerified()) {
+            Intent intent = new Intent(VerificationActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+
+    }
 
     public void resendVerification(View view) {
         user.sendEmailVerification()
