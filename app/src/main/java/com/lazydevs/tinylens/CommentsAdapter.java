@@ -21,14 +21,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     private final Context context;
     ArrayList<ModelComment> comments;
     ArrayList<ModelUser> users;
-    PostDetailViewActivity postDetailViewActivity;
     
 
-    public CommentsAdapter(Context context, ArrayList<ModelComment> comments, ArrayList<ModelUser> users, PostDetailViewActivity postDetailViewActivity) {
+    public CommentsAdapter(Context context, ArrayList<ModelComment> comments, ArrayList<ModelUser> users) {
         this.context = context;
         this.comments = comments;
         this.users = users;
-        this.postDetailViewActivity = postDetailViewActivity;
     }
 
     @Override
@@ -61,7 +59,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
 
 
     }
-
 
     public void setValues(ModelComment comment,ModelUser user){
         comments.add(0,comment);
