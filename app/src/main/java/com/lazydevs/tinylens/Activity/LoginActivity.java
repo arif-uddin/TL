@@ -5,9 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText pass;
     TextView Register;
+    CheckBox checkBoxShowPassword;
     ImageButton login;
     FirebaseAuth firebaseAuth;
     Helper helper;
@@ -44,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         Register = findViewById(R.id.bt_register);
         login = (ImageButton) findViewById(R.id.bt_login);
         forgetPassword = findViewById(R.id.tv_forget_pass_la);
+        checkBoxShowPassword=(CheckBox)findViewById(R.id.cb_show_password);
         loginIndicator=(AVLoadingIndicatorView)findViewById(R.id.login_indicator);
 
         Register.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +118,21 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        checkBoxShowPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkBoxShowPassword.isChecked()) {
+                    // show password
+                    pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                else {
+                    // hide password
+                    pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+
 
     }
 

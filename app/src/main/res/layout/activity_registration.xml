@@ -117,6 +117,14 @@
                 android:id="@+id/et_registration_pass"
                 android:inputType="textPassword"
                 />
+            <CheckBox
+                android:layout_gravity="center"
+                android:id="@+id/cb_show_password_sign_up"
+                android:textColor="#ecf0f1"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="Show Password"
+                />
 
         </LinearLayout>
 
