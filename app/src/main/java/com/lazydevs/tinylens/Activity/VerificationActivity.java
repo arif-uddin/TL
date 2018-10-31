@@ -54,5 +54,10 @@ public class VerificationActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void btn_back_verification(View view) {
+        Intent intent = new Intent(VerificationActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
 }
 

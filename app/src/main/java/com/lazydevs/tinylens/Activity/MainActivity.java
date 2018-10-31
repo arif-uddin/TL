@@ -64,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
         }
+
+        if(firebaseUser!=null)
+        {
+            if(!firebaseUser.isEmailVerified()) {
+                Intent intent = new Intent(MainActivity.this, VerificationActivity.class);
+                startActivity(intent);
+            }
+
+        }
+
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
 
         query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
@@ -79,6 +89,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        if(firebaseUser==null)
+        {
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(firebaseUser==null)
+        {
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void bt_upload_main(View view) {
