@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lazydevs.tinylens.Activity.MainActivity;
 import com.lazydevs.tinylens.Activity.PostDetailViewActivity;
+import com.lazydevs.tinylens.Activity.ProfileActivity;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelUser;
 
@@ -25,13 +26,21 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
     private final Context context;
     ArrayList<ModelImage> images;
     ArrayList<ModelUser> users;
+    ModelUser user;
     MainActivity activity;
+    ProfileActivity profileActivity;
 
     public ShowImagesAdapter(Context context, ArrayList<ModelImage> images, ArrayList<ModelUser> users,MainActivity activity) {
         this.context = context;
         this.images = images;
         this.users = users;
         this.activity = activity;
+    }
+    public ShowImagesAdapter(Context context, ArrayList<ModelImage> images,ModelUser user,ProfileActivity activity) {
+        this.context = context;
+        this.images = images;
+        this.user = user;
+        this.profileActivity = activity;
     }
 
     @Override

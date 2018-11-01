@@ -26,12 +26,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lazydevs.tinylens.CommentsAdapter;
 import com.lazydevs.tinylens.Model.ModelComment;
-import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
 
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
 
 public class PostDetailViewActivity extends AppCompatActivity {
 
@@ -101,7 +99,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         final String mKey= getIntent().getExtras().getString("image_key");
 
         Query query = FirebaseDatabase.getInstance().getReference().child("comments");
-        query.addChildEventListener(new QueryForComments());
+        query.orderByChild("imageKey").equalTo(mKey).addChildEventListener(new QueryForComments());
 
 
         postCommennt.setOnClickListener(new View.OnClickListener() {
