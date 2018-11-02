@@ -12,18 +12,65 @@
     >
 
     <LinearLayout
-        android:gravity="center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LOGIN"
-            android:textSize="35sp"
-            android:textColor="#ecf0f1"
-            />
+        <LinearLayout
+            android:gravity="center|bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:textAlignment="center"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/btn_explore"
+                android:onClick="btnExplore"
+                android:textSize="20sp"
+                android:textColor="#ecf0f1"
+                android:text="Explore First"
+                android:background="@drawable/ic_btn_background"
+                android:layout_width="200dp"
+                android:layout_height="35dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="bottom|center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5">
+            <TextView
+                android:layout_marginBottom="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OR"
+                android:textSize="17sp"
+                android:textColor="#ecf0f1"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOGIN"
+                android:textSize="30sp"
+                android:textColor="#ecf0f1"
+                />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

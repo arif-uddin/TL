@@ -175,4 +175,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
         finish();
     }
+
+    public void btnExplore(View view) {
+        Intent intent= new Intent(LoginActivity.this,ExploreActivity.class);
+        startActivity(intent);
+    }
 }

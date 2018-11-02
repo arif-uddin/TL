@@ -57,7 +57,8 @@
         <activity
             android:name=".Activity.ForgotPasswordActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".Activity.ExploreActivity"
+        <activity
+            android:name=".Activity.ExploreActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" >
 
         </activity>
