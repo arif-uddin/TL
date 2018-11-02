@@ -25,7 +25,7 @@ import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelLike;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
-import com.lazydevs.tinylens.ShowImagesAdapter;
+import com.lazydevs.tinylens.adapter.ShowImagesAdapter;
 
 import java.util.ArrayList;
 

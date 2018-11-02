@@ -180,19 +180,18 @@
 
         </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView_profile_photos">
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recyclerView_profile">
+    </android.support.v7.widget.RecyclerView>
 
-            </android.support.v7.widget.RecyclerView>
-
-        </ScrollView>
+</LinearLayout>
 
     </LinearLayout>
 

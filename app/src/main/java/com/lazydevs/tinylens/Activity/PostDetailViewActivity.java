@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.lazydevs.tinylens.CommentsAdapter;
+import com.lazydevs.tinylens.adapter.CommentsAdapter;
 import com.lazydevs.tinylens.Model.ModelComment;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
@@ -72,13 +72,12 @@ public class PostDetailViewActivity extends AppCompatActivity {
 
         users = new ArrayList<>();
         comments = new ArrayList<>();
+
         //for comment
         commentString=(EditText) findViewById(R.id.et_new_comment);
         postCommennt=(ImageButton)findViewById(R.id.btn_post_comment);
         recyclerView_comment = findViewById(R.id.recyclerView_comment);
-        comments = new ArrayList<>();
 
-        recyclerView_comment.setHasFixedSize(true);
         LinearLayoutManager linearVertical = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView_comment.setLayoutManager(linearVertical);
         commentsAdapter = new CommentsAdapter(getApplicationContext(),comments,users);
@@ -96,7 +95,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         description.setText(getIntent().getExtras().getString("description"));
         category.setText("Category: "+getIntent().getExtras().getString("category"));
 
-        final String mKey= getIntent().getExtras().getString("image_key");
+        final String mKey = getIntent().getExtras().getString("image_key");
 
         Query query = FirebaseDatabase.getInstance().getReference().child("comments");
         query.orderByChild("imageKey").equalTo(mKey).addChildEventListener(new QueryForComments());
