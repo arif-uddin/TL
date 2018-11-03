@@ -19,6 +19,13 @@ public class ModelUser {
         Email = email;
     }
 
+    public ModelUser(String firstName, String lastName, String email,String userPhotoUrl) {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        UserPhotoUrl=userPhotoUrl;
+    }
+
     public String getFirstName() {
         return FirstName;
     }

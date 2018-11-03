@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     ModelUser user;
 
     LinearLayout photoBarBackground,likedBarBackground;
-    TextView photoBarText,likedBarText;
+    TextView photoBarText,likedBarText,currentUserName;
 
 
 
@@ -57,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
         likedBarBackground=(LinearLayout)findViewById(R.id.ll_liked_background);
         photoBarText=(TextView)findViewById(R.id.tv_photos_profile);
         likedBarText=(TextView)findViewById(R.id.tv_liked_profile);
+        currentUserName=(TextView)findViewById(R.id.tv_user_name);
+
 
         recyclerView_profile_photos = findViewById(R.id.recyclerView_profile_photos);
         images = new ArrayList<>();
@@ -78,6 +80,8 @@ public class ProfileActivity extends AppCompatActivity {
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
         query.orderByChild("userID").equalTo(FirebaseAuth.getInstance().getUid()).limitToFirst(50).addChildEventListener(new QueryForImages());
 
+        Query userInfoQuery = FirebaseDatabase.getInstance().getReference().child("users");
+        userInfoQuery.orderByKey().equalTo(firebaseAuth.getCurrentUser().getUid()).addChildEventListener(new QueryForUserDetails());
 
         photoBarText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +98,7 @@ public class ProfileActivity extends AppCompatActivity {
                 photoBarBackground.setBackgroundColor(Color.parseColor("#2980b9"));
             }
         });
+
 
     }
 
@@ -127,15 +132,15 @@ public class ProfileActivity extends AppCompatActivity {
         this.overridePendingTransition(0, 0);
     }
 
-    public void btn_logout(View view) {
-        firebaseAuth.signOut();
-        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+
+    public void btn_settings(View view) {
+        Intent intent=new Intent(ProfileActivity.this,SettingsActivity.class);
         startActivity(intent);
-        finish();
+        this.overridePendingTransition(0, 0);
     }
 
 
-class QueryForImages implements ChildEventListener
+    class QueryForImages implements ChildEventListener
     {
 
         @Override
@@ -157,6 +162,35 @@ class QueryForImages implements ChildEventListener
                 }
             });
             userPhotosAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    }
+
+    class QueryForUserDetails implements ChildEventListener{
+
+        @Override
+        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            ModelUser modelUser = dataSnapshot.getValue(ModelUser.class);
+            currentUserName.setText(modelUser.getFirstName()+" "+modelUser.getLastName());
         }
 
         @Override

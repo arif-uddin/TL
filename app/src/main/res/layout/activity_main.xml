@@ -10,60 +10,60 @@
     >
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:background="@drawable/ic_top_bar_background"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".8">
+    android:orientation="horizontal"
+    android:background="@drawable/ic_top_bar_background"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight=".8">
 
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-            <TextView
-                android:textColor="#ecf0f1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recent"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:textColor="#ecf0f1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Feeds"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:textColor="#ecf0f1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hits"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-
-
+        <TextView
+            android:textColor="#ecf0f1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent"
+            android:textSize="18sp"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:textColor="#ecf0f1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feeds"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:textColor="#ecf0f1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hits"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

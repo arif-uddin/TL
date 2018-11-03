@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ecf0f1"
+    android:orientation="vertical"
+    tools:context=".Activity.SettingsActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/ic_top_bar_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".77">
+
+        <LinearLayout
+            android:gravity="left|center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:onClick="btn_back_settings"
+                android:layout_marginLeft="10dp"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_back_button_icon"
+                android:background="@color/colorAccent"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:textColor="#ecf0f1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        >
+
+        <TextView
+            android:id="@+id/tv_profile_photo_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="Change Profile Photo"
+            android:textColor="#3934be"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_profile_photo_change"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <android.support.v7.widget.CardView
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="165dp">
+
+                <ImageView
+                    android:id="@+id/iv_profile_photo_view"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:id="@+id/ll_upload_btn_layout"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/ibtn_photo_chooser"
+                        android:scaleType="fitCenter"
+                        android:background="@color/colorAccent"
+                        android:src="@drawable/ic_user"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+                    <TextView
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Choose a Photo"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:onClick="btn_cancel_photo_change"
+                        android:layout_margin="5dp"
+                        android:text="Cancel"
+                        android:background="@drawable/ic_btn_background_blue"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <Button
+                        android:layout_margin="5dp"
+                        android:text="Save"
+                        android:background="@drawable/ic_btn_background_blue"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv_log_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="Log Out"
+            android:textColor="#3934be"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

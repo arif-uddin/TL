@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
-
         query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
 
     }
