@@ -48,8 +48,11 @@ public class ProfileActivity extends AppCompatActivity {
         images = new ArrayList<>();
 
 
-        recyclerView_profile_photos.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
-        recyclerView_profile_photos.addItemDecoration(new GridSpacingItemDecoration(3, 10,true));
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,LinearLayoutManager.VERTICAL);
+        recyclerView_profile_photos.setLayoutManager(staggeredGridLayoutManager);
+        staggeredGridLayoutManager.generateDefaultLayoutParams();
+        recyclerView_profile_photos.setHasFixedSize(true);
+        //recyclerView_profile_photos.addItemDecoration(new GridSpacingItemDecoration(3, 10,true));
         userPhotosAdapter = new UserPhotosAdapter(getApplicationContext(),images);
         recyclerView_profile_photos.setAdapter(userPhotosAdapter);
 
@@ -61,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
         query.orderByChild("userID").equalTo(FirebaseAuth.getInstance().getUid()).limitToFirst(50).addChildEventListener(new QueryForImages());
-        //query.orderByKey().limitToFirst(50).addChildEventListener(new QueryForImages());
+        query.orderByKey().limitToFirst(50).addChildEventListener(new QueryForImages());
     }
 
     protected void onPause() {

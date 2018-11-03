@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.R;
 
@@ -38,11 +39,14 @@ public class UserPhotosAdapter extends RecyclerView.Adapter<UserPhotosAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.ic_launcher_background);
+
         Glide
                 .with(context)
                 .load(images.get(i).getmThumbUrl())
+                .apply(requestOptions)
                 .into(viewHolder.imageView);
-
     }
 
     @Override

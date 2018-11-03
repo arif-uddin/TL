@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "819667125372-m4pemun4nd2ap993onrt28uilipj162p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lazydevs.tinylens",
+            "certificate_hash": "7ccb658d072a81306f4e5ea53f4874e22828db62"
+          }
+        },
+        {
           "client_id": "819667125372-iade9u0fh517dbmb2ns4mpnab72bq937.apps.googleusercontent.com",
           "client_type": 3
         }

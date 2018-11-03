@@ -1,5 +1,6 @@
 package com.lazydevs.tinylens.Activity;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -121,10 +124,13 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
 
 
     private void openFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, RC_PERMISSION_READ_EXTERNAL_STORAGE);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        }
     }
 
     @Override
@@ -142,16 +148,12 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             mImageUri = data.getData();
-            Glide
-                    .with(this)
-                    .load(mImageUri)
-                    .into(mImageView);
-            mImageView.setVisibility(ImageView.VISIBLE);
-            mButton_file_browse.setVisibility(Button.GONE);
+
+            mImageView.setImageURI(mImageUri);
         }
+
     }
 
     private String getFileExtension(Uri uri) {
