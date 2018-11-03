@@ -1,6 +1,7 @@
 package com.lazydevs.tinylens.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,7 +38,12 @@ public class ProfileActivity extends AppCompatActivity {
     UserPhotosAdapter userPhotosAdapter;
     DatabaseReference databaseReference;
     public ArrayList<ModelImage> images;
-            ModelUser user;
+    ModelUser user;
+
+    LinearLayout photoBarBackground,likedBarBackground;
+    TextView photoBarText,likedBarText;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,12 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        photoBarBackground=(LinearLayout)findViewById(R.id.ll_photos_background);
+        likedBarBackground=(LinearLayout)findViewById(R.id.ll_liked_background);
+        photoBarText=(TextView)findViewById(R.id.tv_photos_profile);
+        likedBarText=(TextView)findViewById(R.id.tv_liked_profile);
+
         recyclerView_profile_photos = findViewById(R.id.recyclerView_profile_photos);
         images = new ArrayList<>();
 
@@ -64,7 +78,23 @@ public class ProfileActivity extends AppCompatActivity {
 
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
         query.orderByChild("userID").equalTo(FirebaseAuth.getInstance().getUid()).limitToFirst(50).addChildEventListener(new QueryForImages());
-        query.orderByKey().limitToFirst(50).addChildEventListener(new QueryForImages());
+
+        photoBarText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                photoBarBackground.setBackgroundColor(Color.parseColor("#3498db"));
+                likedBarBackground.setBackgroundColor(Color.parseColor("#2980b9"));
+            }
+        });
+
+        likedBarText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likedBarBackground.setBackgroundColor(Color.parseColor("#3498db"));
+                photoBarBackground.setBackgroundColor(Color.parseColor("#2980b9"));
+            }
+        });
+
     }
 
     protected void onPause() {
