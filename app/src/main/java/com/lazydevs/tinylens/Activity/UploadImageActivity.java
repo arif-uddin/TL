@@ -150,10 +150,15 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             mImageUri = data.getData();
+            //mImageView.setImageURI(mImageUri);
 
-            mImageView.setImageURI(mImageUri);
         }
-
+        mButton_file_browse.setVisibility(View.GONE);
+        mImageView.setVisibility(View.VISIBLE);
+        Glide.
+                with(getApplicationContext())
+                .load(mImageUri)
+                .into(mImageView);
     }
 
     private String getFileExtension(Uri uri) {
