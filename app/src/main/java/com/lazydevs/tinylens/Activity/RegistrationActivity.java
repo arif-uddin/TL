@@ -1,6 +1,7 @@
 package com.lazydevs.tinylens.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -162,7 +163,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
     void sendToDatabase(String firstName, String lastName, String email) {
         DatabaseReference databaseReference = firebaseDatabase.getReference("users");
-        ModelUser user = new ModelUser(firstName, lastName, email);
+        ModelUser user = new ModelUser(firstName, lastName, email,"");
         databaseReference.child(getUID()).setValue(user);
     }
 

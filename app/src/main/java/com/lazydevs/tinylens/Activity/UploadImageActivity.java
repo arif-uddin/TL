@@ -151,14 +151,20 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             mImageUri = data.getData();
             //mImageView.setImageURI(mImageUri);
+            if (data.getDataString() != null)
+            {
+                mButton_file_browse.setVisibility(ImageButton.GONE);
+                mImageView.setVisibility(ImageView.VISIBLE);
+            }
 
         }
-        mButton_file_browse.setVisibility(View.GONE);
-        mImageView.setVisibility(View.VISIBLE);
+
         Glide.
                 with(getApplicationContext())
                 .load(mImageUri)
                 .into(mImageView);
+
+
     }
 
     private String getFileExtension(Uri uri) {
@@ -194,7 +200,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
                                             fileReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                 @Override
                                                 public void onSuccess(Uri uri) {
-                                                    Toast.makeText(UploadImageActivity.this, "Upload SuccessFul", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(UploadImageActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
                                                     String uploadId = mDatabaseRef.push().getKey();
                                                     ModelImage modelImage = new ModelImage(mEditTextFileName.getText().toString().trim(),
                                                             mainUri.toString(),uri.toString(),firebaseAuth.getCurrentUser().getUid(), uploadId, mEditTextDescription.getText().toString().trim(), selceted_category);

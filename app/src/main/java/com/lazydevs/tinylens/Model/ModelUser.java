@@ -13,18 +13,18 @@ public class ModelUser {
 
     }
 
-    public ModelUser(String firstName, String lastName, String email) {
+    /*public ModelUser(String userPhotoUrl) {
+        UserPhotoUrl = userPhotoUrl;
+    }*/
+
+    public ModelUser(String firstName, String lastName, String email, String UserPhotoUrl) {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
+        this.UserPhotoUrl = UserPhotoUrl;
     }
 
-    public ModelUser(String firstName, String lastName, String email,String userPhotoUrl) {
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
-        UserPhotoUrl=userPhotoUrl;
-    }
+
 
     public String getFirstName() {
         return FirstName;
