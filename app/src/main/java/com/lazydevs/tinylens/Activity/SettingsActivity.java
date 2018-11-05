@@ -31,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -203,23 +204,17 @@ public class SettingsActivity extends AppCompatActivity {
 
                     fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(Uri uri) {
+                        public void onSuccess(final Uri uri) {
 
                             Toast.makeText(SettingsActivity.this, "Profile photo has changed!", Toast.LENGTH_SHORT).show();
-                            final ModelUser modelUser=new ModelUser();
-                            modelUser.setUserPhotoUrl(uri.toString());
-                            mDatabaseRef.child("users").orderByKey().equalTo(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            final Query query = mDatabaseRef.child("users").orderByKey().equalTo(FirebaseAuth.getInstance().getUid());
+
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                    if (dataSnapshot.exists()) {
-                                        for (DataSnapshot datas : dataSnapshot.getChildren()) {
-                                            String key=datas.getKey();
-                                            String userPhotoUrl=datas.child("userPhotoUrl").getValue().toString();
-                                            mDatabaseRef.child("users").child(key).setValue(modelUser);
-
-                                        }
-                                    }
+                                    Log.d("MyUid",FirebaseAuth.getInstance().getUid());
+                                    mDatabaseRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("userPhotoUrl").setValue(uri.toString());
                                 }
 
                                 @Override
