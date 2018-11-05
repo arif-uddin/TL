@@ -163,7 +163,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
     void sendToDatabase(String firstName, String lastName, String email) {
         DatabaseReference databaseReference = firebaseDatabase.getReference("users");
-        ModelUser user = new ModelUser(firstName, lastName, email,"");
+        ModelUser user = new ModelUser(firstName, lastName, email,null);
         databaseReference.child(getUID()).setValue(user);
     }
 

@@ -76,7 +76,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
 
         viewHolder.counter.setText(images.get(i).like_counter+"");
         viewHolder.image_title.setText(images.get(i).getTitle());
-        //viewHolder.user_name.setText("By"+" "+users.get(i).getFirstName()+" "+users.get(i).getLastName());
+        viewHolder.user_name.setText("By"+" "+users.get(i).getFirstName()+" "+users.get(i).getLastName());
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
