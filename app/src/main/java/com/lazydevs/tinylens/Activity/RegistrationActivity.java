@@ -122,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     void registerUser()
         {
-        firebaseAuth.createUserWithEmailAndPassword(Email.getText().toString(), PassWord.getText().toString())
+        firebaseAuth.createUserWithEmailAndPassword(Email.getText().toString().trim(), PassWord.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -134,7 +134,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             verification();
 
-                            sendToDatabase(FirstName.getText().toString(), LastName.getText().toString(), Email.getText().toString().replaceAll(" ",""));
+                            sendToDatabase(FirstName.getText().toString().trim(), LastName.getText().toString().trim(), Email.getText().toString().replaceAll(" ",""));
 
                             if (user.isEmailVerified()) {
                                 Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
