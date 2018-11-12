@@ -45,6 +45,8 @@ public class PostDetailViewActivity extends AppCompatActivity {
      ImageButton postCommennt;
      EditText commentString;
      CommentsAdapter commentsAdapter;
+     TextView commenterName;
+     ImageView commenterPhoto;
 
 
     private DatabaseReference mDatabaseRef;
@@ -83,6 +85,9 @@ public class PostDetailViewActivity extends AppCompatActivity {
         commentString=(EditText) findViewById(R.id.et_new_comment);
         postCommennt=(ImageButton)findViewById(R.id.btn_post_comment);
         recyclerView_comment = findViewById(R.id.recyclerView_comment);
+        commenterName = findViewById(R.id.tv_commenter_username);
+        commenterPhoto = findViewById(R.id.ib_commenter_photo);
+
 
         LinearLayoutManager linearVertical = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView_comment.setLayoutManager(linearVertical);
@@ -124,6 +129,9 @@ public class PostDetailViewActivity extends AppCompatActivity {
 
             }
         });
+
+
+
 
     }
 

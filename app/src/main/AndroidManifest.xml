@@ -59,9 +59,11 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activity.ExploreActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activity.SettingsActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".Activity.UserProfileActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
