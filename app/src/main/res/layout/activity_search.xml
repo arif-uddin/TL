@@ -15,21 +15,21 @@
         android:layout_height="0dp"
         android:layout_weight=".8">
 
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <!--<LinearLayout-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1">-->
 
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:src="@drawable/ic_back_button_icon" />
+            <!--<ImageButton-->
+                <!--android:padding="10dp"-->
+                <!--android:scaleType="fitCenter"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/colorAccent"-->
+                <!--android:src="@drawable/ic_back_button_icon" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -42,18 +42,45 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:textColor="#000"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="This is search activity"/>
+            android:layout_weight="5"
+            android:focusableInTouchMode="true">
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="Enter text" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_main_bar_search_icon"
+                android:scaleType="fitCenter"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

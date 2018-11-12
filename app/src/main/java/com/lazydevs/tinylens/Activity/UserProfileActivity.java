@@ -1,7 +1,9 @@
 package com.lazydevs.tinylens.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.lazydevs.tinylens.R;
 
@@ -14,4 +16,9 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
 
+    public void btn_back_settings(View view) {
+        Intent intent=new Intent(UserProfileActivity.this,PostDetailViewActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(0, 0);
+    }
 }
