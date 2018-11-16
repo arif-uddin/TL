@@ -11,9 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -34,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    ImageView profilePhoto;
     RecyclerView recyclerView_profile_photos;
     UserPhotosAdapter userPhotosAdapter;
     DatabaseReference databaseReference;
@@ -58,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
         photoBarText=(TextView)findViewById(R.id.tv_photos_profile);
         likedBarText=(TextView)findViewById(R.id.tv_liked_profile);
         currentUserName=(TextView)findViewById(R.id.tv_user_name);
+        profilePhoto=(ImageView)findViewById(R.id.iv_profile_photo);
 
 
         recyclerView_profile_photos = findViewById(R.id.recyclerView_profile_photos);
@@ -191,6 +196,12 @@ public class ProfileActivity extends AppCompatActivity {
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             ModelUser modelUser = dataSnapshot.getValue(ModelUser.class);
             currentUserName.setText(modelUser.getFirstName()+" "+modelUser.getLastName());
+
+            Glide
+                    .with(ProfileActivity.this)
+                    .load(modelUser.getUserPhotoUrl())
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(profilePhoto);
         }
 
         @Override

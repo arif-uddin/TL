@@ -1,4 +1,4 @@
-package com.lazydevs.tinylens;
+package com.lazydevs.tinylens.helper;
 
 import android.content.Context;
 import android.content.res.AssetManager;
