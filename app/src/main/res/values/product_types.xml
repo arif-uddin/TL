@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="product_types">
+        <item>T-Shirt</item>
+        <item>Wallmate</item>
+        <item>Mug</item>
+        <item>Phone Back Cover</item>
+    </string-array>
+</resources>

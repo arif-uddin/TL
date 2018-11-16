@@ -148,7 +148,6 @@ public class PostDetailViewActivity extends AppCompatActivity {
 
         Intent intent=new Intent(PostDetailViewActivity.this,MainActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(0, 0);
     }
 
     public void btn_cart_post_detail(View view) {

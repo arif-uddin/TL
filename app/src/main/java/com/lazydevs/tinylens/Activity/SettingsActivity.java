@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,6 +42,8 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
+
+import java.io.ByteArrayOutputStream;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -198,7 +202,9 @@ public class SettingsActivity extends AppCompatActivity {
             final StorageReference fileReference = mStorageRef.child("user_photos").child(System.currentTimeMillis()+ "_" + FirebaseAuth.getInstance().getUid()
                     + "." + getFileExtension(profilePhotoUri));
 
-            photoUploadTask = fileReference.putFile(profilePhotoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            final byte[] data = compressImage();
+
+            photoUploadTask = fileReference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
@@ -258,6 +264,15 @@ public class SettingsActivity extends AppCompatActivity {
         else{
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    byte[] compressImage()
+    {
+        Bitmap bitmap = ((BitmapDrawable) imageViewProfilePhoto.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+        byte[] data = baos.toByteArray();
+        return  data;
     }
 
 }
