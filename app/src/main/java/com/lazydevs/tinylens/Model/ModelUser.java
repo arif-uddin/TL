@@ -6,6 +6,15 @@ public class ModelUser {
     String LastName;
     String Email;
     String UserPhotoUrl;
+    String UserId;
+
+    public ModelUser(String firstName, String lastName, String email, String userPhotoUrl, String userId) {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        UserPhotoUrl = userPhotoUrl;
+        UserId = userId;
+    }
 
 
     public ModelUser()
@@ -17,12 +26,7 @@ public class ModelUser {
         UserPhotoUrl = userPhotoUrl;
     }*/
 
-    public ModelUser(String firstName, String lastName, String email, String UserPhotoUrl) {
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
-        this.UserPhotoUrl = UserPhotoUrl;
-    }
+
 
 
 
@@ -58,5 +62,8 @@ public class ModelUser {
         UserPhotoUrl = userPhotoUrl;
     }
 
+    public String getUserId() { return UserId; }
+
+    public void setUserId(String userId) { UserId = userId; }
 
 }

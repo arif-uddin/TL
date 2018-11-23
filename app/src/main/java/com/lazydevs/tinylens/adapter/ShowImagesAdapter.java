@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lazydevs.tinylens.Activity.MainActivity;
+import com.lazydevs.tinylens.Activity.OrderActivity;
 import com.lazydevs.tinylens.Activity.PostDetailViewActivity;
 import com.lazydevs.tinylens.Activity.ProfileActivity;
 import com.lazydevs.tinylens.Model.ModelImage;
@@ -87,6 +88,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
                 intent.putExtra("title",images.get(i).getTitle());
                 intent.putExtra("image_key",images.get(i).getmKey());
                 intent.putExtra("user_name",users.get(i).getFirstName()+" "+users.get(i).getLastName());
+                intent.putExtra("userId",users.get(i).getUserId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
             }

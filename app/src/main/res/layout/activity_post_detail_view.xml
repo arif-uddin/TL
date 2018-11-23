@@ -181,9 +181,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Comment here"
-                android:textColorHint="#7e7e7e"
                 android:textColor="#000"
-                />
+                android:textColorHint="#7e7e7e" />
 
         </LinearLayout>
         <LinearLayout

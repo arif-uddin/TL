@@ -153,7 +153,12 @@ public class PostDetailViewActivity extends AppCompatActivity {
     public void btn_cart_post_detail(View view) {
 
         Intent intent=new Intent(PostDetailViewActivity.this,OrderActivity.class);
+        intent.putExtra("image",getIntent().getExtras().getString("image"));
+        intent.putExtra("user_name",getIntent().getExtras().getString("user_name"));
+        intent.putExtra("userId",getIntent().getExtras().getString("userId"));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+
     }
 
 

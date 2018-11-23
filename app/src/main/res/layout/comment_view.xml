@@ -37,11 +37,11 @@
            android:id="@+id/tv_commenter_username"/>
 
        <TextView
+           android:id="@+id/tv_commented_text"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:clickable="false"
-           android:text="Commnet_text"
-           android:id="@+id/tv_commented_text"/>
+           android:text="Commnet_text" />
    </LinearLayout>
 
 </LinearLayout>

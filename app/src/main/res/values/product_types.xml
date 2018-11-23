@@ -2,7 +2,7 @@
 <resources>
     <string-array name="product_types">
         <item>T-Shirt</item>
-        <item>Wallmate</item>
+        <item>Poster</item>
         <item>Mug</item>
         <item>Phone Back Cover</item>
     </string-array>

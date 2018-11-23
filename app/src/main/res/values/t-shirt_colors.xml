@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tshirt_color">
+        <item>White</item>
+        <item>Black</item>
+        <item>Gray</item>
+        <item>Red</item>
+    </string-array>
+</resources>
