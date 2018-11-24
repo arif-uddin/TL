@@ -178,6 +178,28 @@
 
         <TextView
             android:layout_marginTop="5dp"
+            android:onClick="tv_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="Orders"
+            android:textColor="#3934be"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv_you_earned"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="Earned"
+            android:textColor="#3934be"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/tv_log_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

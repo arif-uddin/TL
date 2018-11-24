@@ -92,6 +92,7 @@ public class OrderActivity extends AppCompatActivity {
         photoOwnerName.setText("Photo by"+" "+getIntent().getExtras().getString("user_name"));
 
 
+
     }
 
     private void addItemonProductQuantitySelectSpinner() {
@@ -136,7 +137,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     public void btn_back_order(View view) {
-        onBackPressed();
+        super.onBackPressed();
     }
 
 
@@ -205,11 +206,12 @@ public class OrderActivity extends AppCompatActivity {
                 getIntent().getExtras().getString("image"),
                 selceted_product,
                 key,
-                "Size: "+selceted_tshirt_size+"\n"+"Color: "+selceted_tshirt_color+"\n"+"Quantity: "+selceted_product_quantity+"\n"+"Price/t-shirt: 200BDT"+"\n"+"Original Total: "+tshirtOriginalPrice.getText().toString()+"\n"+"Discount: 10%"+"\n"+"Total After Discount: "+totalAfterDiscount,
+                "Size: "+selceted_tshirt_size+"\n"+"Color: "+selceted_tshirt_color+"\n"+"Price/t-shirt: 200BDT"+"\n"+"Original Total: "+tshirtOriginalPrice.getText().toString()+"\n"+"Discount: 10%"+"\n"+"Total After Discount: "+totalAfterDiscount,
                 DateFormat.getDateTimeInstance().format(new Date()),
                 "Not Received",
                 getIntent().getExtras().getString("userId"),
-                firebaseUser.getUid());
+                firebaseUser.getUid(),
+                selceted_product_quantity);
 
         databaseReference.child("orders").child(key).setValue(order);
         Toast.makeText(this, "Order Complete", Toast.LENGTH_SHORT).show();

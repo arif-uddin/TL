@@ -53,7 +53,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabaseRef;
     private FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
+    private FirebaseUser firebaseUser;
 
 
 
@@ -148,6 +148,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
 
         Intent intent=new Intent(PostDetailViewActivity.this,MainActivity.class);
         startActivity(intent);
+
     }
 
     public void btn_cart_post_detail(View view) {

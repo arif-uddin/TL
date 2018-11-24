@@ -2,10 +2,21 @@ package com.lazydevs.tinylens.Model;
 
 public class ModelOrder {
 
-    String ContactNo,OrderedImageUrl,OrderProductType,OrderId,OrderDescription,OrderDate,OrderStatus,PhotoOwnerId,BuyerId;
+    String ContactNo;
+    String OrderedImageUrl;
+    String OrderProductType;
+    String OrderId;
+    String OrderDescription;
+    String OrderDate;
+    String OrderStatus;
+    String PhotoOwnerId;
+    String BuyerId;
+    String Quantity;
 
+    public ModelOrder() {
+    }
 
-    public ModelOrder(String contactNo, String orderedImageUrl, String orderProductType, String orderId, String orderDescription, String orderDate, String orderStatus, String photoOwnerId, String buyerId) {
+    public ModelOrder(String contactNo, String orderedImageUrl, String orderProductType, String orderId, String orderDescription, String orderDate, String orderStatus, String photoOwnerId, String buyerId, String quantity) {
         ContactNo = contactNo;
         OrderedImageUrl = orderedImageUrl;
         OrderProductType = orderProductType;
@@ -15,7 +26,9 @@ public class ModelOrder {
         OrderStatus = orderStatus;
         PhotoOwnerId = photoOwnerId;
         BuyerId = buyerId;
+        Quantity = quantity;
     }
+
 
     public String getContactNo() {
         return ContactNo;
@@ -88,5 +101,14 @@ public class ModelOrder {
     public void setBuyerId(String buyerId) {
         BuyerId = buyerId;
     }
+
+    public String getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        Quantity = quantity;
+    }
+
 
 }
