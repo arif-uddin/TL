@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecf0f1"
+    android:background="#fff"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,6 +12,39 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".8">
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textColor="#ecf0f1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Photo"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:gravity="right"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -212,7 +245,7 @@
                 android:padding="14dp"
                 android:scaleType="fitCenter"
                 android:background="@color/colorAccent"
-                android:src="@drawable/ic_main_bar_notification_icon"
+                android:src="@drawable/ic_checklist_square_interface_symbol_of_rounded_corners"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="bt_notification_upload"

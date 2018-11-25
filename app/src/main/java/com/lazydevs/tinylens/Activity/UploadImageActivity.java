@@ -82,7 +82,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         firebaseAuth = FirebaseAuth.getInstance();
 
         spinner_category = findViewById(R.id.spinner_category);
-        adapter = ArrayAdapter.createFromResource(this, R.array.photography_categories, R.layout.spinner_item);
+        adapter = ArrayAdapter.createFromResource(this,R.array.photography_categories, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_category.setAdapter(adapter);
         spinner_category.setOnItemSelectedListener(this);

@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,13 +31,23 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerView recyclerViewFeatured;
     DatabaseReference databaseReference;
     public ArrayList<ModelImage> images;
+    AutoCompleteTextView searchBox;
     UserPhotosAdapter userPhotosAdapter;
+    ArrayAdapter<CharSequence> adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        searchBox=(AutoCompleteTextView)findViewById(R.id.actv_search);
+
+       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, CATEGORIES);
+        adapter = ArrayAdapter.createFromResource(this,R.array.photography_categories, R.layout.auto_complete_list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        searchBox.setAdapter(adapter);
+
 
         recyclerViewFeatured = (RecyclerView)findViewById(R.id.rv_search);
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -45,10 +58,19 @@ public class SearchActivity extends AppCompatActivity {
         userPhotosAdapter = new UserPhotosAdapter(getApplicationContext(),images);
         recyclerViewFeatured.setAdapter(userPhotosAdapter);
 
+//        Query query = FirebaseDatabase.getInstance().getReference().child("images");
+//        query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
+
+
+    }
+
+    private static final String[] CATEGORIES = new String[] {
+            "Abstract", "Aerial", "Animal", "Architecture", "Astrophotography","Black and White","Cityscape","Current Events",
+    };
+
+    public void btn_search(View view) {
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
-        query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
-
-
+        query.orderByChild("category").equalTo(searchBox.getText().toString()).addChildEventListener(new QueryForSearchedImages());
     }
 
     class QueryForImages implements ChildEventListener {
@@ -57,21 +79,9 @@ public class SearchActivity extends AppCompatActivity {
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             final ModelImage modelImage = dataSnapshot.getValue(ModelImage.class);
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("images");
-            databaseReference.child(modelImage.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     userPhotosAdapter.setValue(modelImage);
                     userPhotosAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-            userPhotosAdapter.notifyDataSetChanged();
 
         }
 
@@ -123,5 +133,34 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = new Intent(SearchActivity.this,ProfileActivity.class);
         startActivity(intent);
         this.overridePendingTransition(0, 0);
+    }
+
+    private class QueryForSearchedImages implements ChildEventListener {
+        @Override
+        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            final ModelImage modelImage = dataSnapshot.getValue(ModelImage.class);
+            userPhotosAdapter.setValue(modelImage);
+            userPhotosAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
     }
 }
