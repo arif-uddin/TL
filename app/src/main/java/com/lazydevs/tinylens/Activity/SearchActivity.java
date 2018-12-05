@@ -58,17 +58,15 @@ public class SearchActivity extends AppCompatActivity {
         userPhotosAdapter = new UserPhotosAdapter(getApplicationContext(),images);
         recyclerViewFeatured.setAdapter(userPhotosAdapter);
 
-//        Query query = FirebaseDatabase.getInstance().getReference().child("images");
-//        query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
+        Query query = FirebaseDatabase.getInstance().getReference().child("images");
+        query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
 
 
     }
 
-    private static final String[] CATEGORIES = new String[] {
-            "Abstract", "Aerial", "Animal", "Architecture", "Astrophotography","Black and White","Cityscape","Current Events",
-    };
 
     public void btn_search(View view) {
+        images.clear();
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
         query.orderByChild("category").equalTo(searchBox.getText().toString()).addChildEventListener(new QueryForSearchedImages());
     }
