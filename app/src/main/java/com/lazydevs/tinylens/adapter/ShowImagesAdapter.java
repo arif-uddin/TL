@@ -89,7 +89,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
                 intent.putExtra("image_key",images.get(i).getmKey());
                 intent.putExtra("user_name",users.get(i).getFirstName()+" "+users.get(i).getLastName());
                 intent.putExtra("userId",users.get(i).getUserId());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });

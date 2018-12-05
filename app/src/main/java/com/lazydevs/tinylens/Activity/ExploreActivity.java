@@ -47,7 +47,6 @@ public class ExploreActivity extends AppCompatActivity {
 
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
         query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
-
     }
 
     public void btnLogin(View view) {
