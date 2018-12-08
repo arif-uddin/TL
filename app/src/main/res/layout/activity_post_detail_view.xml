@@ -109,7 +109,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="Name"
                                 android:textColor="#000"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
                                 />
 
                             <TextView
@@ -126,11 +127,13 @@
                                 android:layout_height="wrap_content"
                                 android:text="category"
                                 android:textColor="#000"
-                                android:textSize="10dp"
+                                android:textSize="12dp"
+                                android:textStyle="bold"
                                 />
 
                             <TextView
                                 android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
                                 android:id="@+id/description"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

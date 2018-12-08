@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lazydevs.tinylens.Model.ModelComment;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
@@ -39,6 +42,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.User_name.setText(users.get(i).getFirstName()+" "+users.get(i).getLastName());
         viewHolder.Commented_text.setText(comments.get(i).getComment());
+
+        Glide
+                .with(context)
+                .load(users.get(i).getUserPhotoUrl())
+                .apply(RequestOptions.circleCropTransform())
+                .into(viewHolder.imageViewCommenterPhoto);
     }
 
     @Override
@@ -48,11 +57,13 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView Commented_text,User_name;
+        ImageView imageViewCommenterPhoto;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Commented_text = itemView.findViewById(R.id.tv_commented_text);
             User_name = itemView.findViewById(R.id.tv_commenter_username);
+            imageViewCommenterPhoto = itemView.findViewById(R.id.iv_commenter_photo);
         }
 
 
