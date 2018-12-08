@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.LinearLayout;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +18,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.R;
-import com.lazydevs.tinylens.adapter.UserPhotosAdapter;
+import com.lazydevs.tinylens.adapter.ExplorePhotosAdapter;
 
 import java.util.ArrayList;
 
@@ -29,7 +27,7 @@ public class ExploreActivity extends AppCompatActivity {
     RecyclerView recyclerViewExplore;
     DatabaseReference databaseReference;
     public ArrayList<ModelImage> images;
-    UserPhotosAdapter userPhotosAdapter;
+    ExplorePhotosAdapter explorePhotosAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +40,8 @@ public class ExploreActivity extends AppCompatActivity {
 
         recyclerViewExplore.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         recyclerViewExplore.addItemDecoration(new GridSpacingItemDecoration(3, 10,true));
-        userPhotosAdapter = new UserPhotosAdapter(getApplicationContext(),images);
-        recyclerViewExplore.setAdapter(userPhotosAdapter);
+        explorePhotosAdapter = new ExplorePhotosAdapter(getApplicationContext(),images);
+        recyclerViewExplore.setAdapter(explorePhotosAdapter);
 
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
         query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
@@ -70,8 +68,8 @@ public class ExploreActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    userPhotosAdapter.setValue(modelImage);
-                    userPhotosAdapter.notifyDataSetChanged();
+                    explorePhotosAdapter.setValue(modelImage);
+                    explorePhotosAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -79,7 +77,7 @@ public class ExploreActivity extends AppCompatActivity {
 
                 }
             });
-            userPhotosAdapter.notifyDataSetChanged();
+            explorePhotosAdapter.notifyDataSetChanged();
 
         }
 
@@ -102,5 +100,11 @@ public class ExploreActivity extends AppCompatActivity {
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

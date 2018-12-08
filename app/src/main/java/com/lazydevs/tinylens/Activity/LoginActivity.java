@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -167,14 +168,15 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        finish();
-    }
+
+//    protected void onStop() {
+//        super.onStop();
+//        finish();
+//    }
 
     public void btnExplore(View view) {
         Intent intent= new Intent(LoginActivity.this,ExploreActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 

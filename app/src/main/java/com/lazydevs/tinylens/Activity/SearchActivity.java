@@ -10,7 +10,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,19 +19,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lazydevs.tinylens.Model.ModelImage;
+import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
-import com.lazydevs.tinylens.adapter.UserPhotosAdapter;
+import com.lazydevs.tinylens.adapter.ExplorePhotosAdapter;
+import com.lazydevs.tinylens.adapter.SearchUserPhotoAdapter;
 
 import java.util.ArrayList;
-import java.util.MissingFormatArgumentException;
 
 public class SearchActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewFeatured;
     DatabaseReference databaseReference;
     public ArrayList<ModelImage> images;
+    public ArrayList<ModelUser> users;
     AutoCompleteTextView searchBox;
-    UserPhotosAdapter userPhotosAdapter;
+    SearchUserPhotoAdapter searchUserPhotoAdapter;
     ArrayAdapter<CharSequence> adapter;
 
 
@@ -52,11 +53,12 @@ public class SearchActivity extends AppCompatActivity {
         recyclerViewFeatured = (RecyclerView)findViewById(R.id.rv_search);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         images = new ArrayList<>();
+        users = new ArrayList<>();
 
         recyclerViewFeatured.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         recyclerViewFeatured.addItemDecoration(new GridSpacingItemDecoration(3, 10,true));
-        userPhotosAdapter = new UserPhotosAdapter(getApplicationContext(),images);
-        recyclerViewFeatured.setAdapter(userPhotosAdapter);
+        searchUserPhotoAdapter = new SearchUserPhotoAdapter(getApplicationContext(),images,users);
+        recyclerViewFeatured.setAdapter(searchUserPhotoAdapter);
 
         Query query = FirebaseDatabase.getInstance().getReference().child("images");
         query.orderByKey().limitToFirst(100).addChildEventListener(new QueryForImages());
@@ -78,8 +80,21 @@ public class SearchActivity extends AppCompatActivity {
 
             final ModelImage modelImage = dataSnapshot.getValue(ModelImage.class);
 
-                    userPhotosAdapter.setValue(modelImage);
-                    userPhotosAdapter.notifyDataSetChanged();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.child(modelImage.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ModelUser  modelUser= dataSnapshot.getValue(ModelUser.class);
+                    searchUserPhotoAdapter.setValue(modelImage,modelUser);
+                    searchUserPhotoAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            searchUserPhotoAdapter.notifyDataSetChanged();
 
         }
 
@@ -137,8 +152,23 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             final ModelImage modelImage = dataSnapshot.getValue(ModelImage.class);
-            userPhotosAdapter.setValue(modelImage);
-            userPhotosAdapter.notifyDataSetChanged();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.child(modelImage.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    ModelUser  modelUser= dataSnapshot.getValue(ModelUser.class);
+                    searchUserPhotoAdapter.setValue(modelImage,modelUser);
+                    searchUserPhotoAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            searchUserPhotoAdapter.notifyDataSetChanged();
         }
 
         @Override

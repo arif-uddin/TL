@@ -196,7 +196,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void btn_back_signup(View view) {
-        Intent intent=new Intent(RegistrationActivity.this,LoginActivity.class);
-        startActivity(intent);
+        onBackPressed();
+        finish();
     }
 }

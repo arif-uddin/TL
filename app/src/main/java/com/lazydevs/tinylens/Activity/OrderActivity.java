@@ -217,5 +217,7 @@ public class OrderActivity extends AppCompatActivity {
 
         databaseReference.child("orders").child(key).setValue(order);
         Toast.makeText(this, "Order Complete", Toast.LENGTH_SHORT).show();
+        onBackPressed();
+        finish();
     }
 }

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,7 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
-import com.lazydevs.tinylens.adapter.UserPhotosAdapter;
+import com.lazydevs.tinylens.adapter.ExplorePhotosAdapter;
+import com.lazydevs.tinylens.adapter.SearchUserPhotoAdapter;
 
 import java.util.ArrayList;
 
@@ -39,9 +39,10 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     ImageView profilePhoto;
     RecyclerView recyclerView_profile_photos;
-    UserPhotosAdapter userPhotosAdapter;
+    SearchUserPhotoAdapter searchUserPhotoAdapter;
     DatabaseReference databaseReference;
     public ArrayList<ModelImage> images;
+    public ArrayList<ModelUser> users;
     ModelUser user;
 
     LinearLayout photoBarBackground,likedBarBackground;
@@ -67,14 +68,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         recyclerView_profile_photos = findViewById(R.id.recyclerView_profile_photos);
         images = new ArrayList<>();
+        users = new ArrayList<>();
 
 
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,LinearLayoutManager.VERTICAL);
         recyclerView_profile_photos.setLayoutManager(staggeredGridLayoutManager);
         staggeredGridLayoutManager.generateDefaultLayoutParams();
         recyclerView_profile_photos.setHasFixedSize(true);
-        userPhotosAdapter = new UserPhotosAdapter(getApplicationContext(),images);
-        recyclerView_profile_photos.setAdapter(userPhotosAdapter);
+        searchUserPhotoAdapter = new SearchUserPhotoAdapter(getApplicationContext(),images,users);
+        recyclerView_profile_photos.setAdapter(searchUserPhotoAdapter);
 
         if(firebaseUser==null)
         {
@@ -151,13 +153,13 @@ public class ProfileActivity extends AppCompatActivity {
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             final ModelImage modelImage = dataSnapshot.getValue(ModelImage.class);
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("images");
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
             databaseReference.child(modelImage.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    userPhotosAdapter.setValue(modelImage);
-                    userPhotosAdapter.notifyDataSetChanged();
+                    ModelUser  modelUser= dataSnapshot.getValue(ModelUser.class);
+                    searchUserPhotoAdapter.setValue(modelImage,modelUser);
+                    searchUserPhotoAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -165,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 }
             });
-            userPhotosAdapter.notifyDataSetChanged();
+            searchUserPhotoAdapter.notifyDataSetChanged();
         }
 
         @Override
