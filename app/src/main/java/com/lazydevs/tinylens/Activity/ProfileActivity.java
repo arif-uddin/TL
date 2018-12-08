@@ -141,7 +141,6 @@ public class ProfileActivity extends AppCompatActivity {
     public void btn_settings(View view) {
         Intent intent=new Intent(ProfileActivity.this,SettingsActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(0, 0);
     }
 
 

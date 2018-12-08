@@ -92,8 +92,8 @@ public class SettingsActivity extends AppCompatActivity {
 
                 firebaseAuth.signOut();
                 Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
 
             }
         });
@@ -139,9 +139,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void btn_back_settings(View view) {
-        Intent intent=new Intent(SettingsActivity.this,ProfileActivity.class);
-        startActivity(intent);
-        this.overridePendingTransition(0, 0);
+        onBackPressed();
+        finish();
     }
 
     public void btn_cancel_photo_change(View view) {

@@ -137,7 +137,9 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     public void btn_back_order(View view) {
-        super.onBackPressed();
+
+        onBackPressed();
+        finish();
     }
 
 

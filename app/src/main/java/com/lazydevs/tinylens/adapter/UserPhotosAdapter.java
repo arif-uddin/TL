@@ -1,6 +1,7 @@
 package com.lazydevs.tinylens.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.lazydevs.tinylens.Activity.PostDetailViewActivity;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.R;
 
@@ -37,7 +39,7 @@ public class UserPhotosAdapter extends RecyclerView.Adapter<UserPhotosAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
@@ -47,6 +49,22 @@ public class UserPhotosAdapter extends RecyclerView.Adapter<UserPhotosAdapter.Vi
                 .load(images.get(i).getmThumbUrl())
                 .apply(requestOptions)
                 .into(viewHolder.imageView);
+
+        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,PostDetailViewActivity.class);
+                intent.putExtra("image",images.get(i).getmImageUrl());
+                intent.putExtra("description",images.get(i).getDescription());
+                intent.putExtra("category",images.get(i).getCategory());
+                intent.putExtra("title",images.get(i).getTitle());
+                intent.putExtra("image_key",images.get(i).getmKey());
+//                intent.putExtra("user_name",users.get(i).getFirstName()+" "+users.get(i).getLastName());
+//                intent.putExtra("userId",users.get(i).getUserId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
