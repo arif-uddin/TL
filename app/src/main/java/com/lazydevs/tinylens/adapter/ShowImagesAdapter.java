@@ -2,6 +2,8 @@ package com.lazydevs.tinylens.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +23,7 @@ import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.ViewHolder> {
@@ -48,7 +51,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder (@NonNull ViewHolder viewHolder, final int i) {
 
         Glide
                 .with(context)
@@ -87,6 +90,10 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
                 intent.putExtra("category",images.get(i).getCategory());
                 intent.putExtra("title",images.get(i).getTitle());
                 intent.putExtra("image_key",images.get(i).getmKey());
+                intent.putExtra("like_counter",images.get(i).like_counter+"");
+
+//                intent.putExtra("btn_like",images.get(i).getClass());
+
                 intent.putExtra("user_name",users.get(i).getFirstName()+" "+users.get(i).getLastName());
                 intent.putExtra("userId",users.get(i).getUserId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

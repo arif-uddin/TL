@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     public ArrayList<ModelImage> images;
     public ArrayList<ModelUser> users;
+    PostDetailViewActivity postDetailViewActivity;
 
 
     @Override
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         images = new ArrayList<>();
         users = new ArrayList<>();
+
 
         recyclerView = findViewById(R.id.recyclerView_home);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));

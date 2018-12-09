@@ -60,6 +60,7 @@ public class SearchUserPhotoAdapter extends RecyclerView.Adapter<SearchUserPhoto
                 intent.putExtra("category",images.get(i).getCategory());
                 intent.putExtra("title",images.get(i).getTitle());
                 intent.putExtra("image_key",images.get(i).getmKey());
+                intent.putExtra("like_counter",images.get(i).like_counter+"");
                 intent.putExtra("user_name",users.get(i).getFirstName()+" "+users.get(i).getLastName());
                 intent.putExtra("userId",users.get(i).getUserId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

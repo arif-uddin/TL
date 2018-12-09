@@ -1,6 +1,7 @@
 package com.lazydevs.tinylens.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,11 +27,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.lazydevs.tinylens.Model.ModelImage;
+import com.lazydevs.tinylens.Model.ModelLike;
 import com.lazydevs.tinylens.adapter.CommentsAdapter;
 import com.lazydevs.tinylens.Model.ModelComment;
 import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class PostDetailViewActivity extends AppCompatActivity {
@@ -43,13 +47,14 @@ public class PostDetailViewActivity extends AppCompatActivity {
      RecyclerView recyclerView_comment;
      ArrayList<ModelComment> comments;
      ArrayList<ModelUser> users;
-     ImageButton postCommennt;
+     ImageButton postCommennt,likeBtn;
      EditText commentString;
      CommentsAdapter commentsAdapter;
 
-     TextView commenterName;
+     TextView commenterName,likeCounter;
      ImageView commenterPhoto;
 
+     ModelImage modelImage;
 
     private DatabaseReference mDatabaseRef;
     private FirebaseAuth firebaseAuth;
@@ -72,13 +77,11 @@ public class PostDetailViewActivity extends AppCompatActivity {
         user_name= findViewById(R.id.tv_name);
         category= findViewById(R.id.category);
 
-
-
-
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("comments");
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        modelImage= new ModelImage();
 
         users = new ArrayList<>();
         comments = new ArrayList<>();
@@ -88,6 +91,8 @@ public class PostDetailViewActivity extends AppCompatActivity {
         postCommennt=(ImageButton)findViewById(R.id.btn_post_comment);
         recyclerView_comment = findViewById(R.id.recyclerView_comment);
 
+        likeCounter=(TextView)findViewById(R.id.tv_like_counter_post);
+        likeBtn=(ImageButton)findViewById(R.id.btn_like_post);
         commenterName = findViewById(R.id.tv_commenter_username);
         commenterPhoto = findViewById(R.id.iv_commenter_photo);
 
@@ -114,6 +119,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         Query query = FirebaseDatabase.getInstance().getReference().child("comments");
         query.orderByChild("imageKey").equalTo(mKey).addChildEventListener(new QueryForComments());
 
+        likeCounter.setText(getIntent().getExtras().getString("like_counter"));
 
         postCommennt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,24 +139,17 @@ public class PostDetailViewActivity extends AppCompatActivity {
             }
         });
 
-//        commenterName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
+        Query query2 = FirebaseDatabase.getInstance().getReference().child("likes");
+        query2.orderByChild("imageKey").equalTo(mKey).addChildEventListener(new QueryForLikes());
 
 
     }
 
     public void btn_back_post_detail(View view) {
 
-//        Intent intent=new Intent(PostDetailViewActivity.this,MainActivity.class);
-////        startActivity(intent);
         onBackPressed();
         finish();
-
     }
 
     public void btn_cart_post_detail(View view) {
@@ -162,6 +161,11 @@ public class PostDetailViewActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
+    }
+
+    public void btn_like(View view) {
+//        ModelImage Image = (ModelImage) getIntent().getExtras().getSerializableExtra("btn_like");
+//        Log.d("imageLike",""+Image.getmKey());
     }
 
 
@@ -209,6 +213,70 @@ public class PostDetailViewActivity extends AppCompatActivity {
         @Override
         public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
+        }
+
+        @Override
+        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    }
+
+    public void likeHelper(ModelImage image)
+    {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        if(!image.hasUserLiked)
+        {
+            image.hasUserLiked=true;
+            ModelLike modelLike = new ModelLike(firebaseUser.getUid(),image.getmKey());
+            String key = databaseReference.child("likes").push().getKey();
+            databaseReference.child("likes").child(key).setValue(modelLike);
+            image.like_Key=key;
+        }
+        else
+        {
+            image.hasUserLiked=false;
+            if(image.like_Key!=null)
+            {
+                databaseReference.child("likes").child(image.like_Key).removeValue();
+            }
+        }
+
+    }
+
+    private class QueryForLikes implements ChildEventListener {
+        @Override
+        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            ModelLike modelLike = dataSnapshot.getValue(ModelLike.class);
+            modelImage.addLike();
+            if(modelLike.getUserID().equals(FirebaseAuth.getInstance().getUid()))
+            {
+                modelImage.hasUserLiked=true;
+                modelImage.like_Key = dataSnapshot.getKey();
+                likeBtn.setImageResource(R.drawable.ic_like_icon);
+            }
+        }
+
+        @Override
+        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            ModelLike modelLike = dataSnapshot.getValue(ModelLike.class);
+            modelImage.removeLike();
+            if(modelLike.getUserID().equals(FirebaseAuth.getInstance().getUid()))
+            {
+                modelImage.hasUserLiked=false;
+                modelImage.like_Key = null;
+                likeBtn.setImageResource(R.drawable.ic_not_like_icon);
+            }
         }
 
         @Override
