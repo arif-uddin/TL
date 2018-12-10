@@ -6,11 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,13 +35,14 @@ import java.util.Date;
 
 public class OrderActivity extends AppCompatActivity {
 
-    TextView photoOwnerName,tshirtPrice,tshirtOriginalPrice,tshirtAfterDiscountPrice,tshirtDiscount,tshirtContactNo;
+    TextView photoOwnerName,tshirtPrice,tshirtOriginalPrice,tshirtAfterDiscountPrice,tshirtDiscount,tshirtContactNo,tvProductPrice;
     ImageView selectedPhoto;
 
     Spinner spinnerProductTypes;
     Spinner spinnerTshirtSize;
     Spinner spinnerTshirtColor;
     Spinner spinnerProductQuantity;
+    LinearLayout tshirtSize;
     
     ArrayAdapter<CharSequence> adapter_product;
     ArrayAdapter<CharSequence> adapter_tshirt_size;
@@ -47,7 +50,9 @@ public class OrderActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adapter_product_quantity;
     private String selceted_product;
     private String selceted_product_quantity;
+    private String perProductPrice;
     private int totalAfterDiscount;
+    private int photoOwnerProfit;
 
     private String selceted_tshirt_size;
     private String selceted_tshirt_color;
@@ -61,12 +66,16 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+
         photoOwnerName=(TextView)findViewById(R.id.tv_photo_owner_name);
         tshirtPrice=(TextView)findViewById(R.id.tv_tshirt_price_order);
+        tvProductPrice=(TextView)findViewById(R.id.tv_product_price);
         tshirtOriginalPrice=(TextView)findViewById(R.id.tv_original_total_tshirt_price);
         tshirtAfterDiscountPrice=(TextView)findViewById(R.id.tv_tshirt_total_after_discount_price);
         tshirtDiscount=(TextView)findViewById(R.id.tv_tshirt_discount_order);
         tshirtContactNo=(TextView)findViewById(R.id.tv_tshirt_contact_no);
+        tshirtSize=(LinearLayout)findViewById(R.id.layout_size);
         selectedPhoto=(ImageView)findViewById(R.id.iv_selected_photo_order);
 
 
@@ -143,19 +152,6 @@ public class OrderActivity extends AppCompatActivity {
     }
 
 
-    private class ProductSelectedListener implements AdapterView.OnItemSelectedListener {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            selceted_product=parent.getItemAtPosition(position).toString();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    }
-
     private class tshirtSizeSelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -188,10 +184,48 @@ public class OrderActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
             selceted_product_quantity=parent.getItemAtPosition(position).toString();
-            int price=Integer.parseInt(selceted_product_quantity)*200;
-            tshirtOriginalPrice.setText(price+" "+"BDT");
-            totalAfterDiscount=price-(price*10)/100;
-            tshirtAfterDiscountPrice.setText(totalAfterDiscount+" "+"BDT");
+            Price(selceted_product_quantity,perProductPrice);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    private class ProductSelectedListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            selceted_product=parent.getItemAtPosition(position).toString();
+            if(selceted_product.equals("Mug"))
+            {
+                tvProductPrice.setText("Price/Mug:");
+                tshirtPrice.setText("120 BDT");
+                perProductPrice="120";
+                tshirtSize.setVisibility(LinearLayout.GONE);
+                tshirtOriginalPrice.setText("");
+                tshirtAfterDiscountPrice.setText("");
+                selceted_tshirt_size="Standard";
+            }
+            else {
+
+                tvProductPrice.setText("Price/T-shirt:");
+                tshirtPrice.setText("200 BDT");
+                perProductPrice="200";
+                tshirtSize.setVisibility(LinearLayout.VISIBLE);
+                tshirtOriginalPrice.setText("");
+                tshirtAfterDiscountPrice.setText("");
+            }
+            if (selceted_product_quantity==null)
+            {
+                Price("1",perProductPrice);
+            }
+            else
+            {
+                Price(selceted_product_quantity,perProductPrice);
+            }
+
         }
 
         @Override
@@ -214,11 +248,21 @@ public class OrderActivity extends AppCompatActivity {
                 getIntent().getExtras().getString("userId"),
                 firebaseUser.getUid(),
                 selceted_product_quantity,
-                null);
+                null,String.valueOf(photoOwnerProfit),null);
 
         databaseReference.child("orders").child(key).setValue(order);
         Toast.makeText(this, "Order Complete", Toast.LENGTH_SHORT).show();
         onBackPressed();
         finish();
+    }
+
+    public void Price(String quantity, String pricePerProduct)
+    {
+        int price=Integer.parseInt(quantity)*Integer.parseInt(pricePerProduct);
+        tshirtOriginalPrice.setText(price+" "+"BDT");
+        totalAfterDiscount=price-(price*10)/100;
+        int profit=price-(price*5)/100;
+        photoOwnerProfit=price-profit;
+        tshirtAfterDiscountPrice.setText(totalAfterDiscount+" "+"BDT");
     }
 }

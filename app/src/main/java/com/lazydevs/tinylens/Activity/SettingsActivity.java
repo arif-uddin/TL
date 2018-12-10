@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 2;
 
-    TextView logOut,tvChangePhoto,textViewChoosePhoto;
+    TextView logOut,tvChangePhoto,textViewChoosePhoto,tvEarned;
     LinearLayout llChangePhoto,linearLayoutChoosePhoto;
     ImageView imageViewProfilePhoto;
     ImageButton imageButtonChoosePhoto;
@@ -74,6 +74,7 @@ public class SettingsActivity extends AppCompatActivity {
         mDatabaseRef=FirebaseDatabase.getInstance().getReference();
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
+        tvEarned=(TextView)findViewById(R.id.tv_you_earned);
         logOut=(TextView)findViewById(R.id.tv_log_out);
         tvChangePhoto=(TextView)findViewById(R.id.tv_profile_photo_change);
         llChangePhoto=(LinearLayout)findViewById(R.id.ll_profile_photo_change);
@@ -134,6 +135,14 @@ public class SettingsActivity extends AppCompatActivity {
                 } else {
                     uploadPhoto();
                 }
+            }
+        });
+
+        tvEarned.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(SettingsActivity.this,EarnedActivity.class);
+                startActivity(intent);
             }
         });
     }
