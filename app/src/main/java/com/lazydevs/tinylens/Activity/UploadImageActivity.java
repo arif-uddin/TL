@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +43,8 @@ import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.R;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class UploadImageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -60,6 +65,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
     private FirebaseAuth firebaseAuth;
 
     private StorageTask mUploadTask;
+    String deviceModel=null;
 
     private Spinner spinner_category;
     ArrayAdapter<CharSequence> adapter;
@@ -104,6 +110,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         });
 
         mButtonUpload.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
@@ -115,6 +122,29 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         });
 
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private String getExifInfo(Uri uri)
+    {
+        InputStream in = null;
+        try {
+            in = getContentResolver().openInputStream(uri);
+            ExifInterface exifInterface = new ExifInterface(in);
+            deviceModel = exifInterface.getAttribute(ExifInterface.TAG_MAKE)+" "+exifInterface.getAttribute(ExifInterface.TAG_MODEL) ;
+        } catch (IOException e) {
+            e.getStackTrace();
+            Log.e("ExifActivity", e.getMessage());
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
+        Log.d("ExifActivity", "Device: " + deviceModel);
+        return deviceModel;
     }
 
     protected void onPause() {
@@ -173,6 +203,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void uploadFile() {
 
         if (mImageUri != null) {
@@ -182,7 +213,9 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
             final StorageReference fileReference2 = mStorageRef.child("thumbs").child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
 
+            getExifInfo(mImageUri);
             final byte[] data = compressImage();
+
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -203,7 +236,7 @@ public class UploadImageActivity extends AppCompatActivity implements AdapterVie
                                                     Toast.makeText(UploadImageActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
                                                     String uploadId = mDatabaseRef.push().getKey();
                                                     ModelImage modelImage = new ModelImage(mEditTextFileName.getText().toString().trim(),
-                                                            mainUri.toString(),uri.toString(),firebaseAuth.getCurrentUser().getUid(), uploadId, mEditTextDescription.getText().toString().trim(), selceted_category);
+                                                            mainUri.toString(),uri.toString(),firebaseAuth.getCurrentUser().getUid(), uploadId, mEditTextDescription.getText().toString().trim(), selceted_category,deviceModel);
                                                     mDatabaseRef.child(uploadId).setValue(modelImage);
                                                 }
                                             });

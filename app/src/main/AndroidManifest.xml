@@ -69,9 +69,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activity.OrderActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity
-            android:name=".Activity.OrderListActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".Activity.OrderDetailActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 

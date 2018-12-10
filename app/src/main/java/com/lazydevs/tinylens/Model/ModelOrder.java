@@ -1,5 +1,7 @@
 package com.lazydevs.tinylens.Model;
 
+import com.google.firebase.database.Exclude;
+
 public class ModelOrder {
 
     String ContactNo;
@@ -12,11 +14,35 @@ public class ModelOrder {
     String PhotoOwnerId;
     String BuyerId;
     String Quantity;
+    String TransactionId;
+
+    @Exclude
+    String buyerName, ownerName;
+
+    @Exclude
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    @Exclude
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    @Exclude
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    @Exclude
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
     public ModelOrder() {
     }
 
-    public ModelOrder(String contactNo, String orderedImageUrl, String orderProductType, String orderId, String orderDescription, String orderDate, String orderStatus, String photoOwnerId, String buyerId, String quantity) {
+    public ModelOrder(String contactNo, String orderedImageUrl, String orderProductType, String orderId, String orderDescription, String orderDate, String orderStatus, String photoOwnerId, String buyerId, String quantity, String transactionId) {
         ContactNo = contactNo;
         OrderedImageUrl = orderedImageUrl;
         OrderProductType = orderProductType;
@@ -27,6 +53,7 @@ public class ModelOrder {
         PhotoOwnerId = photoOwnerId;
         BuyerId = buyerId;
         Quantity = quantity;
+        TransactionId = transactionId;
     }
 
 
@@ -50,9 +77,7 @@ public class ModelOrder {
         return OrderProductType;
     }
 
-    public void setOrderProductType(String orderProductType) {
-        OrderProductType = orderProductType;
-    }
+    public void setOrderProductType(String orderProductType) { OrderProductType = orderProductType; }
 
     public String getOrderId() {
         return OrderId;
@@ -66,9 +91,7 @@ public class ModelOrder {
         return OrderDescription;
     }
 
-    public void setOrderDescription(String orderDescription) {
-        OrderDescription = orderDescription;
-    }
+    public void setOrderDescription(String orderDescription) { OrderDescription = orderDescription; }
 
     public String getOrderDate() {
         return OrderDate;
@@ -110,5 +133,8 @@ public class ModelOrder {
         Quantity = quantity;
     }
 
+    public String getTransactionId() { return TransactionId; }
+
+    public void setTransactionId(String transactionId) { TransactionId = transactionId; }
 
 }

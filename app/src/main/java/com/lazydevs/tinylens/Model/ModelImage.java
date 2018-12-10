@@ -11,6 +11,7 @@ public class ModelImage {
     private String mImageUrl;
     private String mKey;
     private String userID;
+    private String deviceModel;
 
     @Exclude
     public boolean hasUserLiked=false;
@@ -38,7 +39,7 @@ public class ModelImage {
         //empty constructor needed
     }
 
-    public ModelImage(String name, String imageUrl,String mThumbUrl, String userID, String mKey,String description,String category) {
+    public ModelImage(String name, String imageUrl,String mThumbUrl, String userID, String mKey,String description,String category, String deviceModel) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
@@ -49,6 +50,7 @@ public class ModelImage {
         this.mImageUrl = imageUrl;
         this.userID = userID;
         this.mKey = mKey;
+        this.deviceModel = deviceModel;
     }
 
     public String getTitle() {
@@ -98,5 +100,9 @@ public class ModelImage {
     public String getCategory() { return category; }
 
     public void setCategory(String category) { this.category = category; }
+
+    public String getDeviceModel() { return deviceModel; }
+
+    public void setDeviceModel(String deviceModel) { this.deviceModel = deviceModel; }
 
 }

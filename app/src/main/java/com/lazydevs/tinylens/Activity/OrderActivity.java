@@ -213,7 +213,8 @@ public class OrderActivity extends AppCompatActivity {
                 "Not Received",
                 getIntent().getExtras().getString("userId"),
                 firebaseUser.getUid(),
-                selceted_product_quantity);
+                selceted_product_quantity,
+                null);
 
         databaseReference.child("orders").child(key).setValue(order);
         Toast.makeText(this, "Order Complete", Toast.LENGTH_SHORT).show();

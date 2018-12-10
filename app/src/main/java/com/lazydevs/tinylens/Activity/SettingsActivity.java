@@ -274,8 +274,4 @@ public class SettingsActivity extends AppCompatActivity {
         return  data;
     }
 
-    public void tv_order(View view) {
-        Intent intent= new Intent(SettingsActivity.this,OrderListActivity.class);
-        startActivity(intent);
-    }
 }

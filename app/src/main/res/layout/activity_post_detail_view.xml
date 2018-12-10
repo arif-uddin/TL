@@ -76,6 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                    />
+
                 <ImageView
                     android:layout_marginTop="5dp"
                     android:id="@+id/im_images"
@@ -114,6 +116,16 @@
                                     android:layout_weight="4"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/tv_device_model"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Device"
+                                        android:textColor="#000"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold"
+                                        />
 
                                     <TextView
                                         android:id="@+id/tv_name"

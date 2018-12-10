@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 public class PostDetailViewActivity extends AppCompatActivity {
 
 
-     TextView title,user_name,description,category;
+     TextView title,user_name,description,category,deviceModel;
      ImageView imageView;
 
      //for comment
@@ -76,6 +77,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         imageView= findViewById(R.id.im_images);
         user_name= findViewById(R.id.tv_name);
         category= findViewById(R.id.category);
+        deviceModel=findViewById(R.id.tv_device_model);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("comments");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -102,7 +104,6 @@ public class PostDetailViewActivity extends AppCompatActivity {
         commentsAdapter = new CommentsAdapter(getApplicationContext(),comments,users);
         recyclerView_comment.setAdapter(commentsAdapter);
 
-
         //details view of post
         Glide
                 .with(getApplicationContext())
@@ -113,6 +114,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         title.setText(getIntent().getExtras().getString("title"));
         description.setText(getIntent().getExtras().getString("description"));
         category.setText("Category: "+getIntent().getExtras().getString("category"));
+        deviceModel.setText("Device: "+getIntent().getExtras().getString("deviceModel"));
 
         final String mKey = getIntent().getExtras().getString("image_key");
 

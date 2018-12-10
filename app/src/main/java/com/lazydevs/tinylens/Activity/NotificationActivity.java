@@ -17,7 +17,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.lazydevs.tinylens.Model.ModelOrder;
+import com.lazydevs.tinylens.Model.ModelUser;
 import com.lazydevs.tinylens.R;
 import com.lazydevs.tinylens.adapter.OrderListAdapter;
 
@@ -51,13 +53,15 @@ public class NotificationActivity extends AppCompatActivity {
         orderListAdapter = new OrderListAdapter(getApplicationContext(),orders);
         recyclerVieworderList.setAdapter(orderListAdapter);
 
-        Query query = FirebaseDatabase.getInstance().getReference().child("orders");
-        query.orderByChild("buyerId").equalTo(firebaseAuth.getCurrentUser().getUid()).addChildEventListener(new QueryForOrders());
+
     }
 
-    protected void onPause() {
-        super.onPause();
-        overridePendingTransition(0, 0);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        orders.clear();
+        Query query = FirebaseDatabase.getInstance().getReference().child("orders");
+        query.orderByChild("buyerId").equalTo(firebaseAuth.getCurrentUser().getUid()).addChildEventListener(new QueryForOrders());
     }
 
     public void bt_home_notification(View view) {
@@ -89,8 +93,40 @@ public class NotificationActivity extends AppCompatActivity {
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             final ModelOrder modelOrder = dataSnapshot.getValue(ModelOrder.class);
-            orderListAdapter.setValues(modelOrder);
-            orderListAdapter.notifyDataSetChanged();
+
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.child(modelOrder.getBuyerId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    ModelUser modelUser = dataSnapshot.getValue(ModelUser.class);
+                    String buyerName = modelUser.getFirstName()+" "+modelUser.getLastName();
+                    modelOrder.setBuyerName(buyerName);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            databaseReference.child(modelOrder.getPhotoOwnerId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    ModelUser modelUser = dataSnapshot.getValue(ModelUser.class);
+                    String ownerName = modelUser.getFirstName()+" "+modelUser.getLastName();
+                    modelOrder.setOwnerName(ownerName);
+
+                    orderListAdapter.setValues(modelOrder);
+                    orderListAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
 
         @Override
