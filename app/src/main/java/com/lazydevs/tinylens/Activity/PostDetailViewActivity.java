@@ -30,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lazydevs.tinylens.Model.ModelImage;
 import com.lazydevs.tinylens.Model.ModelLike;
+import com.lazydevs.tinylens.Model.ModelReport;
 import com.lazydevs.tinylens.adapter.CommentsAdapter;
 import com.lazydevs.tinylens.Model.ModelComment;
 import com.lazydevs.tinylens.Model.ModelUser;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 public class PostDetailViewActivity extends AppCompatActivity {
 
 
-     TextView title,user_name,description,category,deviceModel;
+     TextView title,user_name,description,category,deviceModel,tvReport;
      ImageView imageView;
 
      //for comment
@@ -56,10 +57,12 @@ public class PostDetailViewActivity extends AppCompatActivity {
      ImageView commenterPhoto;
 
      ModelImage modelImage;
+     private String imageUrl;
+     private String UserId;
 
-    private DatabaseReference mDatabaseRef;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
+     private DatabaseReference mDatabaseRef;
+     private FirebaseAuth firebaseAuth;
+     private FirebaseUser firebaseUser;
 
 
 
@@ -78,6 +81,7 @@ public class PostDetailViewActivity extends AppCompatActivity {
         user_name= findViewById(R.id.tv_name);
         category= findViewById(R.id.category);
         deviceModel=findViewById(R.id.tv_device_model);
+        tvReport=findViewById(R.id.tv_report);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("comments");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -104,10 +108,12 @@ public class PostDetailViewActivity extends AppCompatActivity {
         commentsAdapter = new CommentsAdapter(getApplicationContext(),comments,users);
         recyclerView_comment.setAdapter(commentsAdapter);
 
+        imageUrl=getIntent().getExtras().getString("imageThumb");
+        UserId=getIntent().getExtras().getString("userId");
         //details view of post
         Glide
                 .with(getApplicationContext())
-                .load(getIntent().getExtras().getString("image"))
+                .load(imageUrl)
                 .into(imageView);
 
         user_name.setText("By"+" "+getIntent().getExtras().getString("user_name"));
@@ -145,7 +151,15 @@ public class PostDetailViewActivity extends AppCompatActivity {
         Query query2 = FirebaseDatabase.getInstance().getReference().child("likes");
         query2.orderByChild("imageKey").equalTo(mKey).addChildEventListener(new QueryForLikes());
 
-
+        tvReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                ModelReport modelReport=new ModelReport(imageUrl,firebaseAuth.getCurrentUser().getUid(),UserId);
+                databaseReference.child("reports").push().setValue(modelReport);
+                Toast.makeText(PostDetailViewActivity.this, "Reported Successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void btn_back_post_detail(View view) {

@@ -86,12 +86,14 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
             public void onClick(View v) {
                 Intent intent=new Intent(context,PostDetailViewActivity.class);
                 intent.putExtra("image",images.get(i).getmImageUrl());
+                intent.putExtra("imageThumb",images.get(i).getmThumbUrl());
                 intent.putExtra("description",images.get(i).getDescription());
                 intent.putExtra("category",images.get(i).getCategory());
                 intent.putExtra("title",images.get(i).getTitle());
                 intent.putExtra("image_key",images.get(i).getmKey());
                 intent.putExtra("like_counter",images.get(i).like_counter+"");
                 intent.putExtra("deviceModel",images.get(i).getDeviceModel());
+                intent.putExtra("userId",images.get(i).getUserID());
 
 //                intent.putExtra("btn_like",images.get(i).getClass());
 
