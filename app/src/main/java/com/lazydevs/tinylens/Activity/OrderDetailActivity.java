@@ -60,20 +60,31 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         String OrderStatus=getIntent().getExtras().getString("order_status");
 
-        if (OrderStatus.equals("Received"))
-        {
+        if (OrderStatus.equals("Received")) {
             layoutTransaction.setVisibility(LinearLayout.VISIBLE);
-        }else{
-            layoutTransaction.setVisibility(LinearLayout.GONE);
-        }
-
-        if(OrderStatus.equals("Not Received"))
-        {
-            layoutOrderCancel.setVisibility(LinearLayout.VISIBLE);
-        }
-        else {
             layoutOrderCancel.setVisibility(LinearLayout.GONE);
         }
+
+        if(OrderStatus.equals("Rejected"))
+        {
+            banCancel.setText("Delete Order");
+            layoutTransaction.setVisibility(LinearLayout.GONE);
+            layoutOrderCancel.setVisibility(LinearLayout.VISIBLE);
+        }
+
+        if(OrderStatus.equals("Under Process"))
+        {
+            layoutTransaction.setVisibility(LinearLayout.GONE);
+            layoutOrderCancel.setVisibility(LinearLayout.GONE);
+        }
+        if(OrderStatus.equals("Delivered"))
+        {
+            banCancel.setText("Remove History");
+            layoutTransaction.setVisibility(LinearLayout.GONE);
+            layoutOrderCancel.setVisibility(LinearLayout.VISIBLE);
+        }
+
+
 
 
         Glide
@@ -97,7 +108,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Query query = FirebaseDatabase.getInstance().getReference().child("orders");
                 query.orderByKey().equalTo(OrderId).addChildEventListener(new QueryForOrderCancel());
-                Toast.makeText(OrderDetailActivity.this, "Order Canceled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderDetailActivity.this, "Done", Toast.LENGTH_SHORT).show();
                 mWaitHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

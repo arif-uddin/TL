@@ -55,7 +55,7 @@ public class SearchUserPhotoAdapter extends RecyclerView.Adapter<SearchUserPhoto
             public void onClick(View v) {
 
                 Intent intent=new Intent(context,PostDetailViewActivity.class);
-                intent.putExtra("image",images.get(i).getmImageUrl());
+                intent.putExtra("imageThumb",images.get(i).getmThumbUrl());
                 intent.putExtra("description",images.get(i).getDescription());
                 intent.putExtra("category",images.get(i).getCategory());
                 intent.putExtra("title",images.get(i).getTitle());
