@@ -1,1 +1,1 @@
-# TL
+# TinyLens- An android app for the smartphone photographer. Anyone can upload photos using his/her account. The system will automatically detect the capturing device of that uploaded photo. Users can see, comment, and react to those photos.  Any user can buy these photos by ordering those photos in a form of a given product like Mug, Phone case, Wall mate, T-shirt, Wallet, etc. The owner of the photo will get a selected percentage of the profit. TinyLensAdmin is the app for managing those orders.
